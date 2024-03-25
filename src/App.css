@@ -1,0 +1,49 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  -webkit-backface-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+  font-family: sans-serif;
+  color: black;
+  text-align: center;
+}
+
+.dropdowns {
+  /* display: flex; */
+  justify-content: space-between;
+}
+
+@media (max-width: 480px) {
+  .App {
+    background-image: url("../img/mobile.jpg");
+  }
+}
+
+@media (min-width: 481px) and (max-width: 1024px) {
+  .App {
+    background-image: url("../img/mobile.jpg");
+  }
+}
+
+@media (min-width: 1025px) {
+  .App {
+    background-image: url("../img/desktop.jpg");
+  }
+}
