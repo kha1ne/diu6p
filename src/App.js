@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 import { Grid } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import DropdownPlayers from "./DropdownPlayers";
+import CheckboxAssignLeaders from "./CheckboxAssignLeaders";
+import ButtonCreateTable from "./ButtonCreateTable";
 import "./App.css";
 
 function App() {
+  const theme = createTheme({
+    typography: {
+      fontFamily: ["Anta"].join(","),
+    },
+  });
+
   const playersList = [
     "Babba",
     "Bata",
@@ -21,24 +30,47 @@ function App() {
     Array(6).fill("Select player")
   );
 
+  const [randomAssignLeaders, setRandomAssignLeaders] = useState(false);
+
   const handleDropdownChange = (index, value) => {
     const updatedPlayers = [...selectedPlayers];
     updatedPlayers[index] = value;
     setSelectedPlayers(updatedPlayers);
   };
 
+  const handleAssignLeadersChanged = (event) => {
+    setRandomAssignLeaders(event.target.checked);
+  };
+
+  const handleCreateTableClicked = () => {
+    console.log("Table created!");
+  };
+
   return (
-    <div className="App">
-      <Grid container justifyContent="center">
-        <Grid item xs={12} sm={8}>
-          <DropdownPlayers
-            playersList={playersList}
-            selectedPlayers={selectedPlayers}
-            handleDropdownChange={handleDropdownChange}
-          />
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <Grid container justifyContent="center">
+          <Grid item xs={12} sm={8}>
+            <div className="container">
+              <DropdownPlayers
+                playersList={playersList}
+                selectedPlayers={selectedPlayers}
+                handleDropdownChange={handleDropdownChange}
+              />
+              <CheckboxAssignLeaders
+                randomAssignLeaders={randomAssignLeaders}
+                handleAssignLeadersChanged={handleAssignLeadersChanged}
+              />
+            </div>
+            <div className="button-container">
+              <ButtonCreateTable
+                handleCreateTableClicked={handleCreateTableClicked}
+              />
+            </div>
+          </Grid>
         </Grid>
-      </Grid>
-    </div>
+      </div>
+    </ThemeProvider>
   );
 }
 
