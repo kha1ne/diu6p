@@ -51,17 +51,15 @@ function App() {
       <div className="App">
         <Grid container justifyContent="center">
           <Grid item xs={12} sm={8}>
-            <div className="container">
-              <DropdownPlayers
-                playersList={playersList}
-                selectedPlayers={selectedPlayers}
-                handleDropdownChange={handleDropdownChange}
-              />
-              <CheckboxAssignLeaders
-                randomAssignLeaders={randomAssignLeaders}
-                handleAssignLeadersChanged={handleAssignLeadersChanged}
-              />
-            </div>
+            <DropdownPlayers
+              playersList={playersList}
+              selectedPlayers={selectedPlayers}
+              handleDropdownChange={handleDropdownChange}
+            />
+            <CheckboxAssignLeaders
+              randomAssignLeaders={randomAssignLeaders}
+              handleAssignLeadersChanged={handleAssignLeadersChanged}
+            />
             <div className="button-container">
               <ButtonCreateTable
                 handleCreateTableClicked={handleCreateTableClicked}

@@ -16,9 +16,9 @@ function DropdownPlayers({
               return handleDropdownChange(index, e.target.value);
             }}
             style={{
-              marginRight: "none",
-              marginLeft: "none",
-              marginTop: "none",
+              marginRight: "auto",
+              marginLeft: "auto",
+              marginTop: "auto",
               marginBottom: "15px",
               width: "45vmin",
             }}
