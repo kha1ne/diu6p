@@ -1,16 +1,29 @@
 {
-  "env": { "browser": true, "es6": true },
-  "parser": "babel-eslint",
-  "extends": ["airbnb", "prettier", "prettier/react"],
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
+  ],
   "globals": { "Atomics": "readonly", "SharedArrayBuffer": "readonly" },
   "parserOptions": {
     "ecmaFeatures": { "jsx": true, "modules": true },
-    "ecmaVersion": 2018,
+    "ecmaVersion": 2023,
     "sourceType": "module"
   },
   "plugins": ["react", "prettier"],
   "rules": {
-    "prettier/prettier": "error",
+    "linebreak-style": ["error", "windows"],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "crlf"
+      }
+    ],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/forbid-prop-types": [0, { "forbid": ["any"] }],
     "react/prop-types": 0,
@@ -20,9 +33,6 @@
     "react/jsx-boolean-value": 0,
     "prefer-template": 1,
     "prefer-const": 1,
-    "no-unused-vars": 1,
-    "import/prefer-default-export": 1,
-    "import/no-extraneous-dependencies": 1,
-    "import/no-unresolved": 1
+    "no-unused-vars": 1
   }
 }
