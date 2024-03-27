@@ -1,10 +1,10 @@
-import React from "react";
-import { Select, MenuItem, FormControl } from "@mui/material";
+import { FormControl, MenuItem, Select } from '@mui/material';
+import React from 'react';
 
 function DropdownPlayers({
   playersList,
   selectedPlayers,
-  handleDropdownChange,
+  handleDropdownChange
 }) {
   return (
     <div>
@@ -12,15 +12,15 @@ function DropdownPlayers({
         <FormControl key={index} fullWidth>
           <Select
             value={player}
-            onChange={(e) => {
+            onChange={e => {
               return handleDropdownChange(index, e.target.value);
             }}
             style={{
-              marginRight: "auto",
-              marginLeft: "auto",
-              marginTop: "auto",
-              marginBottom: "15px",
-              width: "45vmin",
+              marginRight: 'auto',
+              marginLeft: 'auto',
+              marginTop: 'auto',
+              marginBottom: '15px',
+              width: '45vmin'
             }}
           >
             <MenuItem value="Select player" disabled>

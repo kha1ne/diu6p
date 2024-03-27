@@ -1,33 +1,33 @@
-import React, { useState } from "react";
-import { Grid } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import DropdownPlayers from "./DropdownPlayers";
-import CheckboxAssignLeaders from "./CheckboxAssignLeaders";
-import ButtonCreateTable from "./ButtonCreateTable";
-import "./App.css";
+import { Grid } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import React, { useState } from 'react';
+import './App.css';
+import ButtonCreateTable from './ButtonCreateTable';
+import CheckboxAssignLeaders from './CheckboxAssignLeaders';
+import DropdownPlayers from './DropdownPlayers';
 
 function App() {
   const theme = createTheme({
     typography: {
-      fontFamily: ["Anta"].join(","),
-    },
+      fontFamily: ['Anta'].join(',')
+    }
   });
 
   const playersList = [
-    "Babba",
-    "Bata",
-    "Damjan",
-    "Gogi",
-    "Iki",
-    "Mare",
-    "Neša",
-    "Peki",
-    "Robi",
-    "Šilja",
+    'Babba',
+    'Bata',
+    'Damjan',
+    'Gogi',
+    'Iki',
+    'Mare',
+    'Neša',
+    'Peki',
+    'Robi',
+    'Šilja'
   ];
 
   const [selectedPlayers, setSelectedPlayers] = useState(
-    Array(6).fill("Select player")
+    Array(6).fill('Select player')
   );
 
   const [randomAssignLeaders, setRandomAssignLeaders] = useState(false);
@@ -38,12 +38,12 @@ function App() {
     setSelectedPlayers(updatedPlayers);
   };
 
-  const handleAssignLeadersChanged = (event) => {
+  const handleAssignLeadersChanged = event => {
     setRandomAssignLeaders(event.target.checked);
   };
 
   const handleCreateTableClicked = () => {
-    console.log("Table created!");
+    console.log('Table created!');
   };
 
   return (
