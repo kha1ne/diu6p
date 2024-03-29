@@ -27,7 +27,11 @@ function DropdownPlayers({
               Select player
             </MenuItem>
             {playersList.map((option, i) => (
-              <MenuItem key={i} value={option}>
+              <MenuItem
+                key={i}
+                value={option}
+                disabled={selectedPlayers.includes(option) && option !== player}
+              >
                 {option}
               </MenuItem>
             ))}
