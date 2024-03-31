@@ -3,6 +3,7 @@ import React from 'react';
 import questionmark from './img/questionmark.png';
 
 function DropdownPlayers({
+  defaultValue,
   playersList,
   selectedPlayers,
   handleDropdownChange
@@ -40,7 +41,7 @@ function DropdownPlayers({
                 return handleDropdownChange(index, e.target.value);
               }}
             >
-              <MenuItem value="Select player" disabled>
+              <MenuItem value={defaultValue} disabled>
                 Select player
               </MenuItem>
               {playersList.map((option, i) => (

@@ -1,10 +1,10 @@
 import { Grid } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React, { useState } from 'react';
+import './App.css';
 import ButtonCreateTable from './ButtonCreateTable';
 import CheckboxAssignLeaders from './CheckboxAssignLeaders';
 import DropdownPlayers from './DropdownPlayers';
-import './App.css';
 
 function App() {
   const theme = createTheme({
@@ -26,6 +26,8 @@ function App() {
     'Šilja'
   ];
 
+  const dropdownDefaultValue = 'Select player';
+
   const [selectedPlayers, setSelectedPlayers] = useState(
     Array(6).fill('Select player')
   );
@@ -43,8 +45,17 @@ function App() {
   };
 
   const handleCreateTableClicked = () => {
+    const shuffledPlayers = selectedPlayers
+      .slice()
+      .sort(() => Math.random() - 0.5);
+    setSelectedPlayers(shuffledPlayers);
     console.log('Table created!');
   };
+
+  // Check if any of the selected players are still 'Select player'
+  const isAnyPlayerNotSelected = selectedPlayers.some(
+    player => player === dropdownDefaultValue
+  );
 
   return (
     <ThemeProvider theme={theme}>
@@ -52,6 +63,7 @@ function App() {
         <Grid container justifyContent="center">
           <Grid item xs={12} sm={8}>
             <DropdownPlayers
+              defaultValue={dropdownDefaultValue}
               playersList={playersList}
               selectedPlayers={selectedPlayers}
               handleDropdownChange={handleDropdownChange}
@@ -62,6 +74,7 @@ function App() {
             />
             <div className="button-container">
               <ButtonCreateTable
+                disabled={isAnyPlayerNotSelected}
                 handleCreateTableClicked={handleCreateTableClicked}
               />
             </div>
