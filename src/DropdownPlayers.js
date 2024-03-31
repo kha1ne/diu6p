@@ -1,11 +1,11 @@
 import { FormControl, MenuItem, Select } from '@mui/material';
 import React from 'react';
-import questionmark from './img/questionmark.png';
 
 function DropdownPlayers({
   defaultValue,
   playersList,
   selectedPlayers,
+  dropdownPlayerImages,
   handleDropdownChange
 }) {
   const combinedWidthPercentage = 55;
@@ -26,7 +26,7 @@ function DropdownPlayers({
           }}
         >
           <img
-            src={questionmark}
+            src={dropdownPlayerImages[index]}
             alt={`Player ${index + 1}`}
             style={{
               marginRight: '10px',
