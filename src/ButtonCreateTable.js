@@ -1,13 +1,13 @@
 import { Button } from '@mui/material';
 import React from 'react';
 
-function ButtonCreateTable({ disabled, handleCreateTableClicked }) {
+function ButtonCreateTable({ disabled, onClick }) {
   return (
     <Button
       disabled={disabled}
       variant="contained"
       color="primary"
-      onClick={handleCreateTableClicked}
+      onClick={onClick}
     >
       Create Table
     </Button>

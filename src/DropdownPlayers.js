@@ -37,9 +37,7 @@ function DropdownPlayers({
           <FormControl fullWidth style={{ flex: 1 }}>
             <Select
               value={player}
-              onChange={e => {
-                return handleDropdownChange(index, e.target.value);
-              }}
+              onChange={e => handleDropdownChange(index, e.target.value)}
             >
               <MenuItem value={defaultValue} disabled>
                 Select player
