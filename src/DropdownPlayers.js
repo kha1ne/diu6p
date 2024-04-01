@@ -38,6 +38,7 @@ function DropdownPlayers({
             <Select
               value={player}
               onChange={e => handleDropdownChange(index, e.target.value)}
+              style={{ color: 'white' }}
             >
               <MenuItem value={defaultValue} disabled>
                 Select player

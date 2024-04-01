@@ -8,6 +8,7 @@ function CheckboxAssignLeaders({ checked, onChange }) {
         <Checkbox checked={checked} onChange={onChange} color="primary" />
       }
       label="Randomly Assign Allies' Leaders"
+      style={{ color: 'white' }}
     />
   );
 }
