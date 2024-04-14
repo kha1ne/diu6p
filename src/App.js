@@ -1,17 +1,17 @@
 import { Grid } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import ButtonCreateTable from './ButtonCreateTable';
 import CheckboxAssignLeaders from './CheckboxAssignLeaders';
 import DropdownPlayers from './DropdownPlayers';
-import questionmark from './img/questionmark.png';
 import {
   playersList,
   dropdownDefaultValue,
   leaderImagesLookup,
   defaultTheme
 } from './Constants';
+import sfxDramatic from './sfx/dramatic.mp3';
 
 function App() {
   const theme = createTheme(defaultTheme);
@@ -19,8 +19,12 @@ function App() {
     Array(6).fill(dropdownDefaultValue)
   );
   const [randomAssignLeaders, setRandomAssignLeaders] = useState(false);
+
   const [dropdownPlayerImages, setDropdownPlayerImages] = useState(
-    Array(6).fill(questionmark)
+    Array(6).fill({
+      image: leaderImagesLookup.unknown.Questionmark.image,
+      tooltip: leaderImagesLookup.unknown.Questionmark.tooltip
+    })
   );
 
   const handleDropdownChange = (index, value) => {
@@ -33,14 +37,28 @@ function App() {
     setRandomAssignLeaders(event.target.checked);
   };
 
+  const [audioDramatic, setAudioDramatic] = useState(null);
+
+  useEffect(() => {
+    const audio = new Audio(sfxDramatic);
+    audio.preload = 'auto';
+    setAudioDramatic(audio);
+  }, []);
+
   const handleCreateTableClicked = () => {
     const shuffledPlayers = selectedPlayers
       .slice()
       .sort(() => Math.random() - 0.5);
     setSelectedPlayers(shuffledPlayers);
 
-    dropdownPlayerImages[0] = leaderImagesLookup.commanders['Paul'];
-    dropdownPlayerImages[3] = leaderImagesLookup.commanders['Shadam'];
+    dropdownPlayerImages[0] = {
+      image: leaderImagesLookup.commanders['Paul'].image,
+      tooltip: leaderImagesLookup.commanders['Paul'].tooltip
+    };
+    dropdownPlayerImages[3] = {
+      image: leaderImagesLookup.commanders['Shadam'].image,
+      tooltip: leaderImagesLookup.commanders['Shadam'].tooltip
+    };
 
     const alliedLeaders = Object.values(leaderImagesLookup.allies).slice();
 
@@ -54,12 +72,21 @@ function App() {
 
     for (let i = 1; i < dropdownPlayerImages.length; i++) {
       if (i !== 0 && i !== 3) {
-        if (randomAssignLeaders) dropdownPlayerImages[i] = alliedLeaders.pop();
-        else dropdownPlayerImages[i] = questionmark;
+        if (randomAssignLeaders) {
+          dropdownPlayerImages[i] = alliedLeaders.pop();
+        } else {
+          dropdownPlayerImages[i] = {
+            image: leaderImagesLookup.unknown.Questionmark.image,
+            tooltip: leaderImagesLookup.unknown.Questionmark.tooltip
+          };
+        }
       }
     }
 
     setDropdownPlayerImages([...dropdownPlayerImages]);
+
+    if (audioDramatic) audioDramatic.play();
+
     console.log('Table created!');
   };
 

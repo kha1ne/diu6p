@@ -1,4 +1,4 @@
-import { FormControl, MenuItem, Select } from '@mui/material';
+import { FormControl, MenuItem, Select, Tooltip } from '@mui/material';
 import React from 'react';
 
 function DropdownPlayers({
@@ -25,15 +25,22 @@ function DropdownPlayers({
             justifyContent: 'center'
           }}
         >
-          <img
-            src={dropdownPlayerImages[index]}
-            alt={`Player ${index + 1}`}
-            style={{
-              marginRight: '10px',
-              width: 'auto',
-              height: '54'
-            }}
-          />
+          <Tooltip
+            title={dropdownPlayerImages[index].tooltip}
+            enterTouchDelay={0}
+            arrow
+          >
+            <img
+              src={dropdownPlayerImages[index].image}
+              alt={`Player ${index + 1}`}
+              style={{
+                marginRight: '10px',
+                width: 'auto',
+                height: '54px',
+                cursor: 'pointer'
+              }}
+            />
+          </Tooltip>
           <FormControl fullWidth style={{ flex: 1 }}>
             <Select
               value={player}
