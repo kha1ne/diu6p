@@ -23,8 +23,8 @@ function App() {
   const [randomAssignLeaders, setRandomAssignLeaders] = useState(false);
   const [dropdownPlayerImages, setDropdownPlayerImages] = useState(
     Array(6).fill({
-      image: leaderImagesLookup.unknown.Questionmarko.image,
-      tooltip: leaderImagesLookup.unknown.Questionmarko.tooltip
+      image: leaderImagesLookup.unknown.Questionmark.image,
+      tooltip: leaderImagesLookup.unknown.Questionmark.tooltip
     })
   );
 
@@ -50,42 +50,29 @@ function App() {
     const shuffledPlayers = selectedPlayers
       .slice()
       .sort(() => Math.random() - 0.5);
-
     setSelectedPlayers(shuffledPlayers);
 
-    dropdownPlayerImages[0] = {
-      image: leaderImagesLookup.commanders['Paul'].image,
-      tooltip: leaderImagesLookup.commanders['Paul'].tooltip
-    };
-    dropdownPlayerImages[3] = {
-      image: leaderImagesLookup.commanders['Shadam'].image,
-      tooltip: leaderImagesLookup.commanders['Shadam'].tooltip
-    };
+    const updatedImages = [...dropdownPlayerImages];
 
-    const alliedLeaders = Object.values(leaderImagesLookup.allies).slice();
+    updatedImages[0] = leaderImagesLookup.commanders['Paul'];
+    updatedImages[3] = leaderImagesLookup.commanders['Shadam'];
 
-    for (let i = alliedLeaders.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [alliedLeaders[i], alliedLeaders[j]] = [
-        alliedLeaders[j],
-        alliedLeaders[i]
-      ];
-    }
+    const alliedLeaders = Object.values(leaderImagesLookup.allies)
+      .slice()
+      .sort(() => Math.random() - 0.5);
 
-    for (let i = 1; i < dropdownPlayerImages.length; i++) {
+    for (let i = 1; i < updatedImages.length; i++) {
       if (i !== 0 && i !== 3) {
-        if (randomAssignLeaders) {
-          dropdownPlayerImages[i] = alliedLeaders.pop();
-        } else {
-          dropdownPlayerImages[i] = {
-            image: leaderImagesLookup.unknown.Questionmark.image,
-            tooltip: leaderImagesLookup.unknown.Questionmark.tooltip
-          };
-        }
+        updatedImages[i] = randomAssignLeaders
+          ? alliedLeaders.pop()
+          : {
+              image: leaderImagesLookup.unknown.Questionmark.image,
+              tooltip: leaderImagesLookup.unknown.Questionmark.tooltip
+            };
       }
     }
 
-    setDropdownPlayerImages([...dropdownPlayerImages]);
+    setDropdownPlayerImages(updatedImages);
 
     if (audioDramatic) audioDramatic.play();
 
