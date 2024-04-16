@@ -17,11 +17,12 @@ import {
 import sfxDramatic from './sfx/dramatic.mp3';
 
 function App() {
-  const [selectedPlayers, setSelectedPlayers] = useState(
+  const [selectedPlayerOptions, setSelectedPlayerOptions] = useState(
     Array(6).fill(dropdownDefaultValue)
   );
-  const [randomAssignLeaders, setRandomAssignLeaders] = useState(false);
-  const [dropdownPlayerImages, setDropdownPlayerImages] = useState(
+  const [shouldAssignRandomLeaders, setShouldAssignRandomLeaders] =
+    useState(false);
+  const [playerImageOptions, setPlayerImageOptions] = useState(
     Array(6).fill({
       image: leaderImagesLookup.unknown.Questionmark.image,
       tooltip: leaderImagesLookup.unknown.Questionmark.tooltip
@@ -34,37 +35,37 @@ function App() {
     setAudioDramatic(audio);
   }, []);
 
-  const handleDropdownChange = (index, value) => {
-    const updatedPlayers = [...selectedPlayers];
-    updatedPlayers[index] = value;
-    setSelectedPlayers(updatedPlayers);
+  const handlePlayerSelectionChange = (index, value) => {
+    const updatedSelectedPlayerOptions = [...selectedPlayerOptions];
+    updatedSelectedPlayerOptions[index] = value;
+    setSelectedPlayerOptions(updatedSelectedPlayerOptions);
   };
 
-  const handleAssignLeadersChanged = event => {
-    setRandomAssignLeaders(event.target.checked);
+  const handleLeadershipAssignmentChange = event => {
+    setShouldAssignRandomLeaders(event.target.checked);
   };
 
   const [audioDramatic, setAudioDramatic] = useState(null);
 
-  const handleCreateTableClicked = () => {
-    const shuffledPlayers = selectedPlayers
+  const handleCreateTableButtonClick = () => {
+    const shuffledSelectedPlayerOptions = selectedPlayerOptions
       .slice()
       .sort(() => Math.random() - 0.5);
-    setSelectedPlayers(shuffledPlayers);
+    setSelectedPlayerOptions(shuffledSelectedPlayerOptions);
 
-    const updatedImages = [...dropdownPlayerImages];
+    const updatedPlayerImageOptions = [...playerImageOptions];
 
-    updatedImages[0] = leaderImagesLookup.commanders['Paul'];
-    updatedImages[3] = leaderImagesLookup.commanders['Shadam'];
+    updatedPlayerImageOptions[0] = leaderImagesLookup.commanders['Paul'];
+    updatedPlayerImageOptions[3] = leaderImagesLookup.commanders['Shadam'];
 
-    const alliedLeaders = Object.values(leaderImagesLookup.allies)
+    const shuffledAlliedLeaderImages = Object.values(leaderImagesLookup.allies)
       .slice()
       .sort(() => Math.random() - 0.5);
 
-    for (let i = 1; i < updatedImages.length; i++) {
+    for (let i = 1; i < updatedPlayerImageOptions.length; i++) {
       if (i !== 0 && i !== 3) {
-        updatedImages[i] = randomAssignLeaders
-          ? alliedLeaders.pop()
+        updatedPlayerImageOptions[i] = shouldAssignRandomLeaders
+          ? shuffledAlliedLeaderImages.pop()
           : {
               image: leaderImagesLookup.unknown.Questionmark.image,
               tooltip: leaderImagesLookup.unknown.Questionmark.tooltip
@@ -72,14 +73,14 @@ function App() {
       }
     }
 
-    setDropdownPlayerImages(updatedImages);
+    setPlayerImageOptions(updatedPlayerImageOptions);
 
     if (audioDramatic) audioDramatic.play();
 
     console.log('Table created!');
   };
 
-  const isAnyPlayerNotSelected = selectedPlayers.some(
+  const isAnyPlayerNotSelected = selectedPlayerOptions.some(
     player => player === dropdownDefaultValue
   );
 
@@ -93,18 +94,18 @@ function App() {
             <DropdownPlayers
               defaultValue={dropdownDefaultValue}
               playersList={playersList}
-              selectedPlayers={selectedPlayers}
-              dropdownPlayerImages={dropdownPlayerImages}
-              handleDropdownChange={handleDropdownChange}
+              selectedPlayers={selectedPlayerOptions}
+              dropdownPlayerImages={playerImageOptions}
+              handlePlayerSelectionChange={handlePlayerSelectionChange}
             />
             <CheckboxAssignLeaders
-              checked={randomAssignLeaders}
-              onChange={handleAssignLeadersChanged}
+              checked={shouldAssignRandomLeaders}
+              onChange={handleLeadershipAssignmentChange}
             />
             <div className="button-container">
               <ButtonCreateTable
                 disabled={isAnyPlayerNotSelected}
-                onClick={handleCreateTableClicked}
+                onClick={handleCreateTableButtonClick}
               />
             </div>
           </Grid>

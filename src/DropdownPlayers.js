@@ -6,7 +6,7 @@ function DropdownPlayers({
   playersList,
   selectedPlayers,
   dropdownPlayerImages,
-  handleDropdownChange
+  handlePlayerSelectionChange
 }) {
   const combinedWidthPercentage = 55;
 
@@ -44,7 +44,7 @@ function DropdownPlayers({
           <FormControl fullWidth style={{ flex: 1 }}>
             <Select
               value={player}
-              onChange={e => handleDropdownChange(index, e.target.value)}
+              onChange={e => handlePlayerSelectionChange(index, e.target.value)}
               style={{ color: 'white' }}
             >
               <MenuItem value={defaultValue} disabled>
