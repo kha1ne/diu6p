@@ -1,31 +1,38 @@
+import React, { useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import React, { useEffect, useState } from 'react';
 import './App.css';
+
 import ButtonCreateTable from './ButtonCreateTable';
 import CheckboxAssignLeaders from './CheckboxAssignLeaders';
 import DropdownPlayers from './DropdownPlayers';
+
 import {
   playersList,
   dropdownDefaultValue,
   leaderImagesLookup,
   defaultTheme
 } from './Constants';
+
 import sfxDramatic from './sfx/dramatic.mp3';
 
 function App() {
-  const theme = createTheme(defaultTheme);
   const [selectedPlayers, setSelectedPlayers] = useState(
     Array(6).fill(dropdownDefaultValue)
   );
   const [randomAssignLeaders, setRandomAssignLeaders] = useState(false);
-
   const [dropdownPlayerImages, setDropdownPlayerImages] = useState(
     Array(6).fill({
-      image: leaderImagesLookup.unknown.Questionmark.image,
-      tooltip: leaderImagesLookup.unknown.Questionmark.tooltip
+      image: leaderImagesLookup.unknown.Questionmarko.image,
+      tooltip: leaderImagesLookup.unknown.Questionmarko.tooltip
     })
   );
+
+  useEffect(() => {
+    const audio = new Audio(sfxDramatic);
+    audio.preload = 'auto';
+    setAudioDramatic(audio);
+  }, []);
 
   const handleDropdownChange = (index, value) => {
     const updatedPlayers = [...selectedPlayers];
@@ -39,16 +46,11 @@ function App() {
 
   const [audioDramatic, setAudioDramatic] = useState(null);
 
-  useEffect(() => {
-    const audio = new Audio(sfxDramatic);
-    audio.preload = 'auto';
-    setAudioDramatic(audio);
-  }, []);
-
   const handleCreateTableClicked = () => {
     const shuffledPlayers = selectedPlayers
       .slice()
       .sort(() => Math.random() - 0.5);
+
     setSelectedPlayers(shuffledPlayers);
 
     dropdownPlayerImages[0] = {
@@ -93,6 +95,8 @@ function App() {
   const isAnyPlayerNotSelected = selectedPlayers.some(
     player => player === dropdownDefaultValue
   );
+
+  const theme = createTheme(defaultTheme);
 
   return (
     <ThemeProvider theme={theme}>
