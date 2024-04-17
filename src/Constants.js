@@ -1,18 +1,20 @@
-export const playersList = [
-  'Babba',
-  'Bata',
-  'Damjan',
-  'Gogi',
-  'Iki',
-  'Mare',
-  'Neša',
-  'Peki',
-  'Robi',
-  'Šilja'
-];
-export const dropdownDefaultValue = 'Select player';
+export const Players = {
+  list: [
+    'Babba',
+    'Bata',
+    'Damjan',
+    'Gogi',
+    'Iki',
+    'Mare',
+    'Neša',
+    'Peki',
+    'Robi',
+    'Šilja'
+  ],
+  defaultDropdownValue: 'Select player'
+};
 
-export const leaderImagesLookup = {
+export const Leaders = {
   unknown: {
     Questionmark: {
       image: require('./img/questionmark.png'),
@@ -101,7 +103,7 @@ export const leaderImagesLookup = {
   }
 };
 
-export const defaultTheme = {
+export const DefaultTheme = {
   typography: {
     fontFamily: ['Anta'].join(',')
   }

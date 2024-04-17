@@ -1,15 +1,40 @@
-import { Checkbox, FormControlLabel } from '@mui/material';
 import React from 'react';
+import { FormControlLabel, Checkbox } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#ffffff'
+    }
+  },
+  components: {
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          color: '#ffffff'
+        }
+      }
+    }
+  },
+  typography: {
+    body1: {
+      color: '#ffffff'
+    }
+  }
+});
 function CheckboxAssignLeaders({ checked, onChange }) {
   return (
-    <FormControlLabel
-      control={
-        <Checkbox checked={checked} onChange={onChange} color="primary" />
-      }
-      label="Randomly Assign Allies' Leaders"
-      style={{ color: 'white' }}
-    />
+    <ThemeProvider theme={theme}>
+      <div>
+        <FormControlLabel
+          control={
+            <Checkbox checked={checked} onChange={onChange} color="primary" />
+          }
+          label="Assign random leaders to allies"
+        />
+      </div>
+    </ThemeProvider>
   );
 }
 

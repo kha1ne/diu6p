@@ -7,25 +7,20 @@ import ButtonCreateTable from './ButtonCreateTable';
 import CheckboxAssignLeaders from './CheckboxAssignLeaders';
 import DropdownPlayers from './DropdownPlayers';
 
-import {
-  playersList,
-  dropdownDefaultValue,
-  leaderImagesLookup,
-  defaultTheme
-} from './Constants';
+import { Players, Leaders, DefaultTheme } from './Constants';
 
 import sfxDramatic from './sfx/dramatic.mp3';
 
 function App() {
   const [selectedPlayerOptions, setSelectedPlayerOptions] = useState(
-    Array(6).fill(dropdownDefaultValue)
+    Array(6).fill(Players.defaultDropdownValue)
   );
   const [shouldAssignRandomLeaders, setShouldAssignRandomLeaders] =
     useState(false);
   const [playerImageOptions, setPlayerImageOptions] = useState(
     Array(6).fill({
-      image: leaderImagesLookup.unknown.Questionmark.image,
-      tooltip: leaderImagesLookup.unknown.Questionmark.tooltip
+      image: Leaders.unknown.Questionmark.image,
+      tooltip: Leaders.unknown.Questionmark.tooltip
     })
   );
 
@@ -55,10 +50,10 @@ function App() {
 
     const updatedPlayerImageOptions = [...playerImageOptions];
 
-    updatedPlayerImageOptions[0] = leaderImagesLookup.commanders['Paul'];
-    updatedPlayerImageOptions[3] = leaderImagesLookup.commanders['Shadam'];
+    updatedPlayerImageOptions[0] = Leaders.commanders['Paul'];
+    updatedPlayerImageOptions[3] = Leaders.commanders['Shadam'];
 
-    const shuffledAlliedLeaderImages = Object.values(leaderImagesLookup.allies)
+    const shuffledAlliedLeaderImages = Object.values(Leaders.allies)
       .slice()
       .sort(() => Math.random() - 0.5);
 
@@ -67,24 +62,27 @@ function App() {
         updatedPlayerImageOptions[i] = shouldAssignRandomLeaders
           ? shuffledAlliedLeaderImages.pop()
           : {
-              image: leaderImagesLookup.unknown.Questionmark.image,
-              tooltip: leaderImagesLookup.unknown.Questionmark.tooltip
+              image: Leaders.unknown.Questionmark.image,
+              tooltip: Leaders.unknown.Questionmark.tooltip
             };
       }
     }
 
     setPlayerImageOptions(updatedPlayerImageOptions);
 
-    if (audioDramatic) audioDramatic.play();
+    if (audioDramatic) {
+      audioDramatic.complete();
+      audioDramatic.play();
+    }
 
     console.log('Table created!');
   };
 
   const isAnyPlayerNotSelected = selectedPlayerOptions.some(
-    player => player === dropdownDefaultValue
+    player => player === Players.defaultDropdownValue
   );
 
-  const theme = createTheme(defaultTheme);
+  const theme = createTheme(DefaultTheme);
 
   return (
     <ThemeProvider theme={theme}>
@@ -92,8 +90,8 @@ function App() {
         <Grid container justifyContent="center">
           <Grid item xs={12} sm={8}>
             <DropdownPlayers
-              defaultValue={dropdownDefaultValue}
-              playersList={playersList}
+              defaultValue={Players.defaultDropdownValue}
+              playersList={Players.list}
               selectedPlayers={selectedPlayerOptions}
               dropdownPlayerImages={playerImageOptions}
               handlePlayerSelectionChange={handlePlayerSelectionChange}
