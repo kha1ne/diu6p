@@ -71,7 +71,6 @@ function App() {
     setPlayerImageOptions(updatedPlayerImageOptions);
 
     if (audioDramatic) {
-      audioDramatic.complete();
       audioDramatic.play();
     }
 
@@ -104,6 +103,9 @@ function App() {
               <ButtonCreateTable
                 disabled={isAnyPlayerNotSelected}
                 onClick={handleCreateTableButtonClick}
+                label="Create Table"
+                variant="contained"
+                color="primary"
               />
             </div>
           </Grid>
