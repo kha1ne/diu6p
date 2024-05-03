@@ -9,7 +9,8 @@ export const Players = {
     'Neša',
     'Peki',
     'Robi',
-    'Šilja'
+    'Šilja',
+    'Žex'
   ],
   defaultDropdownValue: 'Select player'
 };
