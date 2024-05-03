@@ -2,7 +2,13 @@ import React from 'react';
 import { Button } from '@mui/material';
 import PropTypes from 'prop-types';
 
-function ButtonCreateTable({ disabled, onClick, label, variant, color }) {
+function ButtonCreateTable({
+  disabled = false,
+  onClick,
+  label = 'Create Table',
+  variant = 'contained',
+  color = 'primary'
+}) {
   return (
     <Button
       disabled={disabled}
@@ -19,7 +25,7 @@ function ButtonCreateTable({ disabled, onClick, label, variant, color }) {
 ButtonCreateTable.propTypes = {
   disabled: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   variant: PropTypes.oneOf(['text', 'outlined', 'contained']),
   color: PropTypes.oneOf([
     'inherit',
@@ -30,12 +36,6 @@ ButtonCreateTable.propTypes = {
     'error',
     'info'
   ])
-};
-
-ButtonCreateTable.defaultProps = {
-  disabled: false,
-  variant: 'contained',
-  color: 'primary'
 };
 
 export default ButtonCreateTable;

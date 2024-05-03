@@ -18,6 +18,7 @@ const theme = createTheme({
     }
   },
   typography: {
+    fontFamily: ['Anta'].join(','),
     body1: {
       color: '#ffffff'
     }
