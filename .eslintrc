@@ -31,6 +31,8 @@
     "react/sort-comp": 0,
     "react/no-did-update-set-state": 0,
     "react/jsx-boolean-value": 0,
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
     "prefer-template": 1,
     "prefer-const": 1,
     "no-unused-vars": 1
