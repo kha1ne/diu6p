@@ -1,14 +1,13 @@
 import {
+  createTheme,
   FormControl,
   MenuItem,
-  Select,
-  Tooltip,
   Paper,
-  Typography,
-  createTheme,
-  ThemeProvider
+  Select,
+  ThemeProvider,
+  Tooltip,
+  Typography
 } from '@mui/material';
-import React from 'react';
 
 const textTheme = createTheme({
   typography: {

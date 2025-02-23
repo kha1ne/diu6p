@@ -4,8 +4,12 @@ export const Players = {
     'Bata',
     'Damjan',
     'Gogi',
+    'Grubač',
     'Iki',
+    'Krimer',
+    'Lučić',
     'Mare',
+    'Miške',
     'Neša',
     'Peki',
     'Robi',
@@ -27,79 +31,86 @@ export const Leaders = {
       image: require('./img/leaders/paul_54x54.png'),
       tooltip: "Muad'Dib"
     },
-    Shadam: {
+    Shaddam: {
       image: require('./img/leaders/shadam_54x54.png'),
-      tooltip: 'Shaddam Corrino IV'
+      tooltip: 'Emperor Shaddam Corrino IV'
     }
   },
   allies: {
     Amber: {
       image: require('./img/leaders/amber_54x54.png'),
-      tooltip: 'Amber Metulli'
-    },
-    Ariana: {
-      image: require('./img/leaders/ariana_54x54.png'),
-      tooltip: 'Ariana Thorvald'
-    },
-    Armand: {
-      image: require('./img/leaders/armand_54x54.png'),
-      tooltip: 'Armand Ecaz'
+      tooltip: 'Lady Amber Metulli',
+      expansion: 'Main Game'
     },
     Feyd: {
       image: require('./img/leaders/feyd_54x54.png'),
-      tooltip: 'Feyd Rautha'
+      tooltip: 'Feyd-Rautha Harkonnen',
+      expansion: 'Main Game'
     },
-    Gourney: {
-      image: require('./img/leaders/gourney_54x54.png'),
-      tooltip: 'Gourney Haleck'
-    },
-    Ilban: {
-      image: require('./img/leaders/ilban_54x54.png'),
-      tooltip: 'Ilban Richese'
-    },
-    Ilesa: {
-      image: require('./img/leaders/ilesa_54x54.png'),
-      tooltip: 'Ilesa Ecaz'
+    Gurney: {
+      image: require('./img/leaders/gurney_54x54.png'),
+      tooltip: 'Gurney Halleck',
+      expansion: 'Main Game'
     },
     Irulan: {
       image: require('./img/leaders/irulan_54x54.png'),
-      tooltip: 'Irulan Corrino'
+      tooltip: 'Princess Irulan',
+      expansion: 'Main Game'
     },
     Jessica: {
       image: require('./img/leaders/jessica_54x54.png'),
-      tooltip: 'Jessica Attreides'
+      tooltip: 'Lady Jessica',
+      expansion: 'Main Game'
     },
-    Leto: {
-      image: require('./img/leaders/leto_54x54.png'),
-      tooltip: 'Leto Attreides'
-    },
-    Margo: {
+    Margot: {
       image: require('./img/leaders/margot_54x54.png'),
-      tooltip: 'Margot Fenring'
-    },
-    Memnon: {
-      image: require('./img/leaders/memnon_54x54.png'),
-      tooltip: 'Memnon Thorvald'
-    },
-    Raban: {
-      image: require('./img/leaders/rabban_54x54.png'),
-      tooltip: 'Rabban Harkonnen'
+      tooltip: 'Lady Margot Fenring',
+      expansion: 'Main Game'
     },
     Staban: {
       image: require('./img/leaders/staban_54x54.png'),
-      tooltip: 'Staban Tuek'
+      tooltip: 'Staban Tuek',
+      expansion: 'Main Game'
     },
-    Tessia: {
-      image: require('./img/leaders/tessia_54x54.png'),
-      tooltip: 'Tessia Vernius'
+    Kota: {
+      image: require('./img/leaders/kota_54x54.png'),
+      tooltip: 'Kota Odax of Ix',
+      expansion: 'Bloodlines'
     },
-    Vladimir: {
-      image: require('./img/leaders/vladimir_54x54.png'),
-      tooltip: 'Vladimir Harkonen'
+    Piter: {
+      image: require('./img/leaders/piter_54x54.png'),
+      tooltip: 'Piter de Vries',
+      expansion: 'Bloodlines'
     },
-    Yuna: {
-      image: require('./img/leaders/yuna_54x54.png'),
-      tooltip: 'Yuna Moritani'
+    Chani: {
+      image: require('./img/leaders/chani_54x54.png'),
+      tooltip: 'Chani Kynes',
+      expansion: 'Bloodlines'
+    },
+    Duncan: {
+      image: require('./img/leaders/duncan_54x54.png'),
+      tooltip: 'Duncan Idaho',
+      expansion: 'Bloodlines'
+    },
+    Hasimir: {
+      image: require('./img/leaders/hasimir_54x54.png'),
+      tooltip: 'Count Hasimir Fenring',
+      expansion: 'Bloodlines'
+    },
+    Liet: {
+      image: require('./img/leaders/liet_54x54.png'),
+      tooltip: 'Liet Kynes',
+      expansion: 'Bloodlines'
+    },
+    Mohiam: {
+      image: require('./img/leaders/mohiam_54x54.png'),
+      tooltip: 'Gaius Helen Mohiam',
+      expansion: 'Bloodlines'
+    },
+    Esmar: {
+      image: require('./img/leaders/esmar_54x54.png'),
+      tooltip: 'Esmar Tuek',
+      expansion: 'Bloodlines'
     }
   }
 };

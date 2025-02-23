@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useEffect, useState } from 'react';
 import './App.css';
 
 import ButtonCreateTable from './ButtonCreateTable';
-import CheckboxAssignLeaders from './CheckboxAssignLeaders';
+import {
+  CheckboxAssignLeaders,
+  CheckboxUseOnlyBloodlines
+} from './CheckboxLeaders';
 import DropdownPlayers from './DropdownPlayers';
 
-import { Players, Leaders, DefaultTheme } from './Constants';
+import { DefaultTheme, Leaders, Players } from './Constants';
 
 import sfxDramatic from './sfx/dramatic.mp3';
 
@@ -17,6 +20,7 @@ function App() {
   );
   const [shouldAssignRandomLeaders, setShouldAssignRandomLeaders] =
     useState(false);
+  const [useOnlyBloodlines, setUseOnlyBloodlines] = useState(false);
   const [playerImageOptions, setPlayerImageOptions] = useState(
     Array(6).fill({
       image: Leaders.unknown.Questionmark.image,
@@ -40,6 +44,10 @@ function App() {
     setShouldAssignRandomLeaders(event.target.checked);
   };
 
+  const handleUseOnlyBloodlinesChange = event => {
+    setUseOnlyBloodlines(event.target.checked);
+  };
+
   const [audioDramatic, setAudioDramatic] = useState(null);
 
   const handleCreateTableButtonClick = () => {
@@ -51,9 +59,16 @@ function App() {
     const updatedPlayerImageOptions = [...playerImageOptions];
 
     updatedPlayerImageOptions[0] = Leaders.commanders['Paul'];
-    updatedPlayerImageOptions[3] = Leaders.commanders['Shadam'];
+    updatedPlayerImageOptions[3] = Leaders.commanders['Shaddam'];
 
-    const shuffledAlliedLeaderImages = Object.values(Leaders.allies)
+    const allAlliedLeaderImages = Object.values(Leaders.allies);
+    const filteredAlliedLeaderImages = useOnlyBloodlines
+      ? allAlliedLeaderImages.filter(
+          leader => leader.expansion === 'Bloodlines'
+        )
+      : allAlliedLeaderImages;
+
+    const shuffledAlliedLeaderImages = filteredAlliedLeaderImages
       .slice()
       .sort(() => Math.random() - 0.5);
 
@@ -98,6 +113,11 @@ function App() {
             <CheckboxAssignLeaders
               checked={shouldAssignRandomLeaders}
               onChange={handleLeadershipAssignmentChange}
+            />
+            <CheckboxUseOnlyBloodlines
+              checked={useOnlyBloodlines}
+              onChange={handleUseOnlyBloodlinesChange}
+              disabled={!shouldAssignRandomLeaders}
             />
             <div className="button-container">
               <ButtonCreateTable
