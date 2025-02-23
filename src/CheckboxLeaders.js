@@ -39,13 +39,18 @@ export function CheckboxAssignLeaders({ checked, onChange }) {
   );
 }
 
-export function CheckboxUseOnlyBloodlines({ checked, onChange }) {
+export function CheckboxUseOnlyBloodlines({ checked, onChange, disabled }) {
   return (
     <ThemeProvider theme={theme}>
       <div>
         <FormControlLabel
           control={
-            <Checkbox checked={checked} onChange={onChange} color="primary" />
+            <Checkbox
+              checked={checked}
+              onChange={onChange}
+              color="primary"
+              disabled={disabled}
+            />
           }
           label="Use Bloodlines Leaders"
         />

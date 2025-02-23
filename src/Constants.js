@@ -97,9 +97,9 @@ export const Leaders = {
       tooltip: 'Count Hasimir Fenring',
       expansion: 'Bloodlines'
     },
-    Liet: {
-      image: require('./img/leaders/liet_54x54.png'),
-      tooltip: 'Liet Kynes',
+    Yrkoon: {
+      image: require('./img/leaders/yrkoon_54x54.png'),
+      tooltip: "Steersman Y'rkoon",
       expansion: 'Bloodlines'
     },
     Mohiam: {

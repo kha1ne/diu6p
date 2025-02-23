@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Grid2 as Grid } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 import './App.css';
@@ -42,6 +42,9 @@ function App() {
 
   const handleLeadershipAssignmentChange = event => {
     setShouldAssignRandomLeaders(event.target.checked);
+    if (!event.target.checked) {
+      setUseOnlyBloodlines(false);
+    }
   };
 
   const handleUseOnlyBloodlinesChange = event => {
@@ -102,7 +105,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <Grid container justifyContent="center">
-          <Grid item xs={12} sm={8}>
+          <Grid xs={12} sm={8}>
             <DropdownPlayers
               defaultValue={Players.defaultDropdownValue}
               playersList={Players.list}
