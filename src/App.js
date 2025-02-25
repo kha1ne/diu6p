@@ -30,6 +30,7 @@ function App() {
       tooltip: Leaders.unknown.Questionmark.tooltip
     })
   );
+  const [audioDramatic, setAudioDramatic] = useState(null);
 
   useEffect(() => {
     const audio = new Audio(sfxDramatic);
@@ -55,11 +56,9 @@ function App() {
     setUseOnlyBloodlines(event.target.checked);
   };
 
-  const handleAuthenticStoryExperience = event => {
+  const handleAuthenticStoryExperienceChange = event => {
     setAuthenticStoryExperience(event.target.checked);
   };
-
-  const [audioDramatic, setAudioDramatic] = useState(null);
 
   function getRandomElements(array, count) {
     const shuffled = array.slice().sort(() => 0.5 - Math.random());
@@ -110,7 +109,7 @@ function App() {
         2
       );
 
-      filteredAlliedLeaderImages = [...paulAllies, ...shaddamAllies];
+      filteredAlliedLeaderImages = [...paulAllies, ...shaddamAllies].reverse();
     } else {
       shuffleArray(filteredAlliedLeaderImages);
     }
@@ -162,7 +161,7 @@ function App() {
             />
             <CheckboxAuthenticStoryExperience
               checked={authenticStoryExperience}
-              onChange={handleAuthenticStoryExperience}
+              onChange={handleAuthenticStoryExperienceChange}
               disabled={!shouldAssignRandomLeaders}
             />
             <div className="button-container">
