@@ -6,6 +6,7 @@ import './App.css';
 import ButtonCreateTable from './ButtonCreateTable';
 import {
   CheckboxAssignLeaders,
+  CheckboxAuthenticStoryExperience,
   CheckboxUseOnlyBloodlines
 } from './CheckboxLeaders';
 import DropdownPlayers from './DropdownPlayers';
@@ -21,6 +22,8 @@ function App() {
   const [shouldAssignRandomLeaders, setShouldAssignRandomLeaders] =
     useState(false);
   const [useOnlyBloodlines, setUseOnlyBloodlines] = useState(false);
+  const [authenticStoryExperience, setAuthenticStoryExperience] =
+    useState(false);
   const [playerImageOptions, setPlayerImageOptions] = useState(
     Array(6).fill({
       image: Leaders.unknown.Questionmark.image,
@@ -44,6 +47,7 @@ function App() {
     setShouldAssignRandomLeaders(event.target.checked);
     if (!event.target.checked) {
       setUseOnlyBloodlines(false);
+      setAuthenticStoryExperience(false);
     }
   };
 
@@ -51,7 +55,23 @@ function App() {
     setUseOnlyBloodlines(event.target.checked);
   };
 
+  const handleAuthenticStoryExperience = event => {
+    setAuthenticStoryExperience(event.target.checked);
+  };
+
   const [audioDramatic, setAudioDramatic] = useState(null);
+
+  function getRandomElements(array, count) {
+    const shuffled = array.slice().sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+  }
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i >= 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
 
   const handleCreateTableButtonClick = () => {
     const shuffledSelectedPlayerOptions = selectedPlayerOptions
@@ -65,20 +85,40 @@ function App() {
     updatedPlayerImageOptions[3] = Leaders.commanders['Shaddam'];
 
     const allAlliedLeaderImages = Object.values(Leaders.allies);
-    const filteredAlliedLeaderImages = useOnlyBloodlines
+    let filteredAlliedLeaderImages = useOnlyBloodlines
       ? allAlliedLeaderImages.filter(
           leader => leader.expansion === 'Bloodlines'
         )
       : allAlliedLeaderImages;
 
-    const shuffledAlliedLeaderImages = filteredAlliedLeaderImages
-      .slice()
-      .sort(() => Math.random() - 0.5);
+    if (authenticStoryExperience) {
+      const paulAllies = getRandomElements(
+        filteredAlliedLeaderImages.filter(
+          leader =>
+            leader.alignment === 'Atreides' || leader.alignment === 'Neutral'
+        ),
+        2
+      );
+
+      const shaddamAllies = getRandomElements(
+        filteredAlliedLeaderImages.filter(
+          leader =>
+            (leader.alignment === 'Corrino' ||
+              leader.alignment === 'Neutral') &&
+            !paulAllies.includes(leader)
+        ),
+        2
+      );
+
+      filteredAlliedLeaderImages = [...paulAllies, ...shaddamAllies];
+    } else {
+      shuffleArray(filteredAlliedLeaderImages);
+    }
 
     for (let i = 1; i < updatedPlayerImageOptions.length; i++) {
       if (i !== 0 && i !== 3) {
         updatedPlayerImageOptions[i] = shouldAssignRandomLeaders
-          ? shuffledAlliedLeaderImages.pop()
+          ? filteredAlliedLeaderImages.pop()
           : {
               image: Leaders.unknown.Questionmark.image,
               tooltip: Leaders.unknown.Questionmark.tooltip
@@ -91,8 +131,6 @@ function App() {
     if (audioDramatic) {
       audioDramatic.play();
     }
-
-    console.log('Table created!');
   };
 
   const isAnyPlayerNotSelected = selectedPlayerOptions.some(
@@ -120,6 +158,11 @@ function App() {
             <CheckboxUseOnlyBloodlines
               checked={useOnlyBloodlines}
               onChange={handleUseOnlyBloodlinesChange}
+              disabled={!shouldAssignRandomLeaders}
+            />
+            <CheckboxAuthenticStoryExperience
+              checked={authenticStoryExperience}
+              onChange={handleAuthenticStoryExperience}
               disabled={!shouldAssignRandomLeaders}
             />
             <div className="button-container">

@@ -58,3 +58,27 @@ export function CheckboxUseOnlyBloodlines({ checked, onChange, disabled }) {
     </ThemeProvider>
   );
 }
+
+export function CheckboxAuthenticStoryExperience({
+  checked,
+  onChange,
+  disabled
+}) {
+  return (
+    <ThemeProvider theme={theme}>
+      <div>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={checked}
+              onChange={onChange}
+              color="primary"
+              disabled={disabled}
+            />
+          }
+          label="Authentic Story Experience"
+        />
+      </div>
+    </ThemeProvider>
+  );
+}
