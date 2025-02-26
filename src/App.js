@@ -73,9 +73,8 @@ function App() {
   };
 
   const handleCreateTableButtonClick = () => {
-    const shuffledSelectedPlayerOptions = selectedPlayerOptions
-      .slice()
-      .sort(() => Math.random() - 0.5);
+    const shuffledSelectedPlayerOptions = [...selectedPlayerOptions];
+    shuffleArray(shuffledSelectedPlayerOptions);
     setSelectedPlayerOptions(shuffledSelectedPlayerOptions);
 
     const updatedPlayerImageOptions = [...playerImageOptions];
@@ -142,7 +141,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <Grid container justifyContent="center">
-          <Grid xs={12} sm={8}>
+          <Grid>
             <DropdownPlayers
               defaultValue={Players.defaultDropdownValue}
               playersList={Players.list}
@@ -150,29 +149,45 @@ function App() {
               dropdownPlayerImages={playerImageOptions}
               handlePlayerSelectionChange={handlePlayerSelectionChange}
             />
-            <CheckboxAssignLeaders
-              checked={shouldAssignRandomLeaders}
-              onChange={handleLeadershipAssignmentChange}
-            />
-            <CheckboxUseOnlyBloodlines
-              checked={useOnlyBloodlines}
-              onChange={handleUseOnlyBloodlinesChange}
-              disabled={!shouldAssignRandomLeaders}
-            />
-            <CheckboxAuthenticStoryExperience
-              checked={authenticStoryExperience}
-              onChange={handleAuthenticStoryExperienceChange}
-              disabled={!shouldAssignRandomLeaders}
-            />
-            <div className="button-container">
-              <ButtonCreateTable
-                disabled={isAnyPlayerNotSelected}
-                onClick={handleCreateTableButtonClick}
-                label="Create Table"
-                variant="contained"
-                color="primary"
-              />
-            </div>
+            <Grid
+              container
+              direction="column"
+              spacing={1}
+              alignItems="left"
+              justifyContent="center"
+            >
+              <Grid>
+                <CheckboxAssignLeaders
+                  checked={shouldAssignRandomLeaders}
+                  onChange={handleLeadershipAssignmentChange}
+                />
+              </Grid>
+              <Grid>
+                <CheckboxUseOnlyBloodlines
+                  checked={useOnlyBloodlines}
+                  onChange={handleUseOnlyBloodlinesChange}
+                  disabled={!shouldAssignRandomLeaders}
+                />
+              </Grid>
+              <Grid>
+                <CheckboxAuthenticStoryExperience
+                  checked={authenticStoryExperience}
+                  onChange={handleAuthenticStoryExperienceChange}
+                  disabled={!shouldAssignRandomLeaders}
+                />
+              </Grid>
+            </Grid>
+            <Grid>
+              <div className="button-container">
+                <ButtonCreateTable
+                  disabled={isAnyPlayerNotSelected}
+                  onClick={handleCreateTableButtonClick}
+                  label="Create Table"
+                  variant="contained"
+                  color="primary"
+                />
+              </div>
+            </Grid>
           </Grid>
         </Grid>
       </div>
