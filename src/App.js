@@ -60,17 +60,17 @@ function App() {
     setAuthenticStoryExperience(event.target.checked);
   };
 
-  function getRandomElements(array, count) {
+  const getRandomElements = (array, count) => {
     const shuffled = array.slice().sort(() => 0.5 - Math.random());
     return shuffled.slice(0, count);
-  }
+  };
 
-  function shuffleArray(array) {
+  const shuffleArray = array => {
     for (let i = array.length - 1; i >= 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
     }
-  }
+  };
 
   const handleCreateTableButtonClick = () => {
     const shuffledSelectedPlayerOptions = selectedPlayerOptions
