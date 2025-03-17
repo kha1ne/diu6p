@@ -1,18 +1,17 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Grid2 as Grid } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import './App.css';
 import ButtonCreateTable from './ButtonCreateTable';
-import { CheckboxAssignLeaders, CheckboxAuthenticStoryExperience, CheckboxUseOnlyBloodlines } from './CheckboxLeaders';
+import { CheckboxAuthenticStoryExperience, CheckboxUseOnlyBloodlines, LeaderAssignment } from './CheckboxLeaders';
 import { DefaultTheme, Leaders, Players } from './Constants';
 import DropdownPlayers from './DropdownPlayers';
 import sfxDramatic from './assets/sfx/dramatic.mp3';
 
 function App() {
   const [selectedPlayerOptions, setSelectedPlayerOptions] = useState(Array(6).fill(Players.defaultDropdownValue));
-  const [shouldAssignRandomLeaders, setShouldAssignRandomLeaders] = useState(false);
   const [useOnlyBloodlines, setUseOnlyBloodlines] = useState(false);
   const [authenticStoryExperience, setAuthenticStoryExperience] = useState(false);
   const [playerImageOptions, setPlayerImageOptions] = useState(
@@ -29,6 +28,17 @@ function App() {
     setAudioDramatic(audio);
   }, []);
 
+  const [leaderAssignment, setLeaderAssignment] = useState<'none' | 'random' | 'draft'>('none');
+
+  const handleLeaderAssignmentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value as 'none' | 'random' | 'draft';
+    setLeaderAssignment(value);
+    if (value === 'draft' || value === 'none') {
+      setUseOnlyBloodlines(false);
+      setAuthenticStoryExperience(false);
+    }
+  };
+
   const handlePlayerSelectionChange = (index: number, value: string) => {
     if (!Number.isSafeInteger(index) || index < 0 || index >= selectedPlayerOptions.length) {
       return;
@@ -43,20 +53,6 @@ function App() {
       updatedOptions[index] = value;
       return updatedOptions;
     });
-  };
-
-  interface LeadershipAssignmentChangeEvent {
-    target: {
-      checked: boolean;
-    };
-  }
-
-  const handleLeadershipAssignmentChange = (event: LeadershipAssignmentChangeEvent) => {
-    setShouldAssignRandomLeaders(event.target.checked);
-    if (!event.target.checked) {
-      setUseOnlyBloodlines(false);
-      setAuthenticStoryExperience(false);
-    }
   };
 
   interface UseOnlyBloodlinesChangeEvent {
@@ -133,7 +129,7 @@ function App() {
       if (index === 3) return Leaders.commanders['Shaddam'];
 
       if (index !== 0 && index !== 3) {
-        if (shouldAssignRandomLeaders && filteredAlliedLeaderImages.length > 0) {
+        if (leaderAssignment === 'random' && filteredAlliedLeaderImages.length > 0) {
           return filteredAlliedLeaderImages.pop();
         }
         return {
@@ -167,20 +163,20 @@ function App() {
             />
             <Grid container direction='column' spacing={1} alignItems='left' justifyContent='center'>
               <Grid>
-                <CheckboxAssignLeaders checked={shouldAssignRandomLeaders} onChange={handleLeadershipAssignmentChange} />
+                <LeaderAssignment value={leaderAssignment} onChange={handleLeaderAssignmentChange} />
               </Grid>
               <Grid>
                 <CheckboxUseOnlyBloodlines
                   checked={useOnlyBloodlines}
                   onChange={handleUseOnlyBloodlinesChange}
-                  disabled={!shouldAssignRandomLeaders}
+                  disabled={leaderAssignment !== 'random'}
                 />
               </Grid>
               <Grid>
                 <CheckboxAuthenticStoryExperience
                   checked={authenticStoryExperience}
                   onChange={handleAuthenticStoryExperienceChange}
-                  disabled={!shouldAssignRandomLeaders}
+                  disabled={leaderAssignment !== 'random'}
                 />
               </Grid>
             </Grid>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Checkbox, FormControlLabel } from '@mui/material';
+import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -17,6 +17,13 @@ const theme = createTheme({
         },
       },
     },
+    MuiRadio: {
+      styleOverrides: {
+        root: {
+          color: '#ffffff',
+        },
+      },
+    },
   },
   typography: {
     fontFamily: ['Anta'].join(','),
@@ -26,17 +33,21 @@ const theme = createTheme({
   },
 });
 
-interface CheckboxAssignLeadersProps {
-  checked: boolean;
+interface LeaderAssignmentProps {
+  value: 'none' | 'random' | 'draft';
   onChange: (_event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export function CheckboxAssignLeaders({ checked, onChange }: CheckboxAssignLeadersProps) {
+export function LeaderAssignment({ value, onChange }: LeaderAssignmentProps) {
   return (
     <ThemeProvider theme={theme}>
-      <div>
-        <FormControlLabel control={<Checkbox checked={checked} onChange={onChange} color='primary' />} label='Assign Random Allies' />
-      </div>
+      <FormControl>
+        <RadioGroup value={value} onChange={onChange} row>
+          <FormControlLabel value='none' control={<Radio color='primary' />} label='No Selection' />
+          <FormControlLabel value='random' control={<Radio color='primary' />} label='Random Assignment' />
+          <FormControlLabel value='draft' control={<Radio color='primary' />} label='Draft Pool' />
+        </RadioGroup>
+      </FormControl>
     </ThemeProvider>
   );
 }
