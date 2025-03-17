@@ -1,7 +1,6 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
   color: black;
 }
 
@@ -24,12 +23,12 @@ body {
 
 @media (max-width: 1024px) {
   .App {
-    background-image: url('./img/mobile.jpg');
+    background-image: url('./assets/img/mobile.jpg');
   }
 }
 
 @media (min-width: 1025px) {
   .App {
-    background-image: url('./img/desktop.jpg');
+    background-image: url('./assets/img/desktop.jpg');
   }
 }
