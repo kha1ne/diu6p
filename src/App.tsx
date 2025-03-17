@@ -89,7 +89,7 @@ function App() {
   };
 
   interface ShuffleArray {
-    <T>(array: T[]): void;
+    <T>(_array: T[]): void;
   }
 
   const shuffleArray: ShuffleArray = array => {

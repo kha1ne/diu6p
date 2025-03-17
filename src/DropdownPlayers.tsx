@@ -13,7 +13,7 @@ interface DropdownPlayersProps {
   playersList: string[];
   selectedPlayers: string[];
   dropdownPlayerImages: { image: string; tooltip: string }[];
-  handlePlayerSelectionChange: (index: number, value: string) => void;
+  handlePlayerSelectionChange: (_index: number, _value: string) => void;
 }
 
 function DropdownPlayers({ defaultValue, playersList, selectedPlayers, dropdownPlayerImages, handlePlayerSelectionChange }: DropdownPlayersProps) {

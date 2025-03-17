@@ -28,7 +28,7 @@ const theme = createTheme({
 
 interface CheckboxAssignLeadersProps {
   checked: boolean;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (_event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export function CheckboxAssignLeaders({ checked, onChange }: CheckboxAssignLeadersProps) {
@@ -43,7 +43,7 @@ export function CheckboxAssignLeaders({ checked, onChange }: CheckboxAssignLeade
 
 interface CheckboxUseOnlyBloodlinesProps {
   checked: boolean;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (_event: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
 }
 
@@ -62,7 +62,7 @@ export function CheckboxUseOnlyBloodlines({ checked, onChange, disabled }: Check
 
 interface CheckboxAuthenticStoryExperienceProps {
   checked: boolean;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (_event: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
 }
 
