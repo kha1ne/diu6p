@@ -95,6 +95,8 @@ function App() {
     }
   };
 
+  const [draftPool, setDraftPool] = useState<Array<(typeof Leaders.allies)[keyof typeof Leaders.allies]>>([]);
+
   const handleCreateTableButtonClick = () => {
     const shuffledSelectedPlayerOptions = [...selectedPlayerOptions];
     shuffleArray(shuffledSelectedPlayerOptions);
@@ -104,6 +106,14 @@ function App() {
     let filteredAlliedLeaderImages = useOnlyBloodlines
       ? allAlliedLeaderImages.filter(leader => leader.expansion === 'Bloodlines')
       : allAlliedLeaderImages;
+
+    if (leaderAssignment === 'draft') {
+      const poolSize = 10;
+      const randomPool = getRandomElements(filteredAlliedLeaderImages, poolSize);
+      setDraftPool(randomPool);
+    } else {
+      setDraftPool([]);
+    }
 
     if (authenticStoryExperience) {
       const paulAllies = getRandomElements(
@@ -161,7 +171,7 @@ function App() {
               dropdownPlayerImages={playerImageOptions}
               handlePlayerSelectionChange={handlePlayerSelectionChange}
             />
-            <Grid container direction='column' spacing={1} alignItems='left' justifyContent='center'>
+            <Grid container direction='column' spacing={0} alignItems='left' justifyContent='center'>
               <Grid>
                 <LeaderAssignment value={leaderAssignment} onChange={handleLeaderAssignmentChange} />
               </Grid>
@@ -190,6 +200,75 @@ function App() {
                   color='primary'
                 />
               </div>
+              {leaderAssignment === 'draft' && draftPool.length > 0 && (
+                <Grid
+                  container
+                  sx={{
+                    mt: 0,
+                    width: '430px',
+                    margin: '0 auto',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Grid
+                    container
+                    spacing={1}
+                    sx={{
+                      mb: 0.5,
+                      justifyContent: 'center',
+                      maxWidth: '430px',
+                    }}
+                  >
+                    {draftPool.slice(0, 5).map((leader, index) => (
+                      <Grid key={index} data-testid={`draft-pool-item-${index}`}>
+                        <img
+                          src={leader.image}
+                          alt={leader.tooltip}
+                          title={leader.tooltip}
+                          style={{
+                            width: '56px',
+                            height: '56px',
+                            border: '2px solid #fff',
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            display: 'block',
+                            margin: '0 auto',
+                          }}
+                        />
+                      </Grid>
+                    ))}
+                  </Grid>
+                  <Grid
+                    container
+                    spacing={1}
+                    sx={{
+                      justifyContent: 'center',
+                      maxWidth: '430px',
+                    }}
+                  >
+                    {draftPool.slice(5, 10).map((leader, index) => (
+                      <Grid key={index + 5} data-testid={`draft-pool-item-${index}`}>
+                        <img
+                          src={leader.image}
+                          alt={leader.tooltip}
+                          title={leader.tooltip}
+                          style={{
+                            width: '56px',
+                            height: '56px',
+                            border: '2px solid #fff',
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            display: 'block',
+                            margin: '0 auto',
+                          }}
+                        />
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Grid>
+              )}
             </Grid>
           </Grid>
         </Grid>

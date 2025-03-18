@@ -62,4 +62,25 @@ describe('App Component', () => {
     const createTableButton = screen.getByText('Create Table');
     expect(createTableButton).toBeEnabled();
   });
+
+  test('shows draft pool when Draft Pool is selected and Create Table is clicked', async () => {
+    render(<App />);
+    const user = userEvent.setup();
+
+    const draftPoolRadio = screen.getByRole('radio', { name: /Draft Pool/i });
+    await user.click(draftPoolRadio);
+
+    const dropdowns = screen.getAllByRole('combobox');
+    for (let i = 0; i < dropdowns.length; i++) {
+      await user.click(dropdowns[i]);
+      const playerOption = screen.getByRole('option', { name: Players.list[i] });
+      await user.click(playerOption);
+    }
+
+    const createTableButton = screen.getByText('Create Table');
+    await user.click(createTableButton);
+
+    const gridItems = screen.getAllByTestId(/^draft-pool-item-/);
+    expect(gridItems).toHaveLength(10);
+  });
 });

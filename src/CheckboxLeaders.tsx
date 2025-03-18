@@ -42,7 +42,20 @@ export function LeaderAssignment({ value, onChange }: LeaderAssignmentProps) {
   return (
     <ThemeProvider theme={theme}>
       <FormControl>
-        <RadioGroup value={value} onChange={onChange} row>
+        <RadioGroup
+          value={value}
+          onChange={onChange}
+          row
+          sx={{
+            '& .MuiFormControlLabel-root': {
+              marginRight: 1, // Reduce right margin
+              '& .MuiTypography-root': {
+                fontSize: '0.9rem', // Slightly smaller font
+                whiteSpace: 'nowrap', // Prevent label wrapping
+              },
+            },
+          }}
+        >
           <FormControlLabel value='none' control={<Radio color='primary' />} label='No Selection' />
           <FormControlLabel value='random' control={<Radio color='primary' />} label='Random Assignment' />
           <FormControlLabel value='draft' control={<Radio color='primary' />} label='Draft Pool' />
@@ -63,6 +76,7 @@ export function CheckboxUseOnlyBloodlines({ checked, onChange, disabled }: Check
     <ThemeProvider theme={theme}>
       <div>
         <FormControlLabel
+          sx={{ margin: 0 }}
           control={<Checkbox checked={checked} onChange={onChange} color='primary' disabled={disabled} />}
           label='Use Bloodlines Leaders'
         />
@@ -82,6 +96,7 @@ export function CheckboxAuthenticStoryExperience({ checked, onChange, disabled }
     <ThemeProvider theme={theme}>
       <div>
         <FormControlLabel
+          sx={{ margin: 0 }}
           control={<Checkbox checked={checked} onChange={onChange} color='primary' disabled={disabled} />}
           label='Authentic Story Experience'
         />
