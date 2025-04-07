@@ -26,22 +26,19 @@ This repository contains a minimal setup for a React project using TypeScript. T
 Ensure you have the following installed:
 
 - [Node.js](https://nodejs.org/en/) (version 16.x or higher recommended)
-- [Yarn](https://yarnpkg.com/) (optional but recommended for package management)
+- [Corepack](https://nodejs.org/api/corepack.html) (included with Node.js 16.10+)
+- [Yarn 4](https://yarnpkg.com/) (managed via Corepack)
 
 ### Installation
 
 Clone the repository and install the dependencies:
 
 ```bash
-git clone https://github.com/your-username/hello-world.git
-cd hello-world
+git clone git@github.com:kha1ne/diu6p.git
+cd diu6p
+corepack enable
+corepack prepare yarn@4.8.1 --activate
 yarn install
-```
-
-If you prefer npm, you can install the dependencies with:
-
-```bash
-npm install
 ```
 
 ### Running the Application
@@ -79,7 +76,7 @@ Coverage reports are generated automatically and can be found in the coverage fo
 ## Project Structure
 
 ```php
-hello-world/
+diu6p/
 ├── public/                 # Static assets
 ├── src/                    # Application source code
 │   ├── components/         # React components
