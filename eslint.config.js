@@ -11,7 +11,6 @@ const globals = require('globals');
 const reactHooksPlugin = require('eslint-plugin-react-hooks');
 const promisePlugin = require('eslint-plugin-promise');
 const securityPlugin = require('eslint-plugin-security');
-const unicornPlugin = require('eslint-plugin-unicorn');
 const nodePlugin = require('eslint-plugin-node');
 
 module.exports = [
@@ -45,17 +44,36 @@ module.exports = [
       'react-hooks': reactHooksPlugin,
       promise: promisePlugin,
       security: securityPlugin,
-      unicorn: unicornPlugin,
       node: nodePlugin,
     },
     rules: {
-      'no-unused-vars': ['warn', { varsIgnorePattern: '^_', argsIgnorePattern: '^_' }],
+      'no-unused-vars': ['error', {
+        args: 'all',
+        argsIgnorePattern: '^_',
+        caughtErrors: 'all',
+        caughtErrorsIgnorePattern: '^_',
+        destructuredArrayIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        ignoreRestSiblings: true
+      }],
+      '@typescript-eslint/no-unused-vars': ['error', {
+        args: 'all',
+        argsIgnorePattern: '^_',
+        caughtErrors: 'all',
+        caughtErrorsIgnorePattern: '^_',
+        destructuredArrayIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        ignoreRestSiblings: true
+      }],
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
       'react/react-in-jsx-scope': 'off',
       'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.jsx'] }],
       'react/jsx-key': 'error',
       'react/self-closing-comp': 'error',
+      'import/first': 'error',
+      'import/newline-after-import': 'error',
+      'import/no-duplicates': 'error',
       'import/order': ['error', { groups: ['builtin', 'external', 'internal'] }],
       'jsx-a11y/anchor-is-valid': 'warn',
       'prettier/prettier': 'error',
@@ -75,6 +93,7 @@ module.exports = [
       'promise/always-return': 'warn',
       'promise/no-return-wrap': 'warn',
       'promise/param-names': 'error',
+      'security/detect-object-injection': 'warn',
       'security/detect-object-injection': 'off',
       'node/no-unsupported-features/es-syntax': 'off',
     },
