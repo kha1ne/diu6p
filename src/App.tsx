@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Grid2 as Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import './App.css';
