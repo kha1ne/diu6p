@@ -7,6 +7,15 @@ build/
 # Coverage files
 coverage/
 
+# Yarn 4
+.yarn/
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
 # Environment files
 .env
 .env.local
