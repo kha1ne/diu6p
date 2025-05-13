@@ -37,7 +37,7 @@ Clone the repository and install the dependencies:
 git clone git@github.com:kha1ne/diu6p.git
 cd diu6p
 corepack enable
-corepack prepare yarn@4.8.1 --activate
+corepack prepare yarn@4.9.1 --activate
 yarn install
 ```
 
