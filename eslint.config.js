@@ -11,7 +11,6 @@ const globals = require('globals');
 const reactHooksPlugin = require('eslint-plugin-react-hooks');
 const promisePlugin = require('eslint-plugin-promise');
 const securityPlugin = require('eslint-plugin-security');
-const nodePlugin = require('eslint-plugin-node');
 
 module.exports = [
   {
@@ -44,27 +43,32 @@ module.exports = [
       'react-hooks': reactHooksPlugin,
       promise: promisePlugin,
       security: securityPlugin,
-      node: nodePlugin,
     },
     rules: {
-      'no-unused-vars': ['error', {
-        args: 'all',
-        argsIgnorePattern: '^_',
-        caughtErrors: 'all',
-        caughtErrorsIgnorePattern: '^_',
-        destructuredArrayIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-        ignoreRestSiblings: true
-      }],
-      '@typescript-eslint/no-unused-vars': ['error', {
-        args: 'all',
-        argsIgnorePattern: '^_',
-        caughtErrors: 'all',
-        caughtErrorsIgnorePattern: '^_',
-        destructuredArrayIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-        ignoreRestSiblings: true
-      }],
+      'no-unused-vars': [
+        'error',
+        {
+          args: 'all',
+          argsIgnorePattern: '^_',
+          caughtErrors: 'all',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+        },
+      ],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          args: 'all',
+          argsIgnorePattern: '^_',
+          caughtErrors: 'all',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+        },
+      ],
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
       'react/react-in-jsx-scope': 'off',
@@ -93,16 +97,14 @@ module.exports = [
       'promise/always-return': 'warn',
       'promise/no-return-wrap': 'warn',
       'promise/param-names': 'error',
-      'security/detect-object-injection': 'warn',
       'security/detect-object-injection': 'off',
-      'node/no-unsupported-features/es-syntax': 'off',
     },
     settings: {
       react: {
         version: 'detect',
       },
       'import/resolver': {
-        typescript: {},
+        typescript: true,
       },
     },
   },
