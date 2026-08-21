@@ -1,7 +1,6 @@
-import type { JSX } from 'react';
-
 import type { SelectChangeEvent } from '@mui/material';
-import { FormControl, MenuItem, Paper, Select, ThemeProvider, Tooltip, Typography, createTheme } from '@mui/material';
+import { createTheme,FormControl, MenuItem, Paper, Select, ThemeProvider, Tooltip, Typography } from '@mui/material';
+import type { JSX } from 'react';
 
 const textTheme = createTheme({
   typography: {
