@@ -1,10 +1,8 @@
-import '@testing-library/jest-dom';
-
 import { render } from '@testing-library/react';
 
-import App from './App';
+import App from '../src/App';
 
-describe('index component', () => {
+describe('main component', () => {
   test('renders App component without crashing', () => {
     const { container } = render(<App />);
     expect(container).toBeInTheDocument();

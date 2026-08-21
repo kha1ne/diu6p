@@ -1,10 +1,8 @@
-import '@testing-library/jest-dom';
-
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import App from './App';
-import { Players } from './Constants';
+import App from '../src/App';
+import { Players } from '../src/Constants';
 
 describe('App Component', () => {
   test('renders initial state correctly', () => {

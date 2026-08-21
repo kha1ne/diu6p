@@ -1,7 +1,6 @@
+import react from '@vitejs/plugin-react';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-
-import react from '@vitejs/plugin-react';
 import { defineConfig, loadEnv } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
@@ -58,9 +57,22 @@ export default defineConfig(({ mode }) => {
       port: port + 1,
       strictPort: false,
     },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('@mui') || id.includes('@emotion')) return 'vendor-mui';
+            if (id.includes('react-router')) return 'vendor-router';
+            if (id.includes('react-dom') || id.includes('react/')) return 'vendor-react';
+            if (id.includes('workbox')) return 'vendor-workbox';
+            return undefined;
+          },
+        },
+      },
+    },
     test: {
       environment: 'jsdom',
-      setupFiles: './src/setupTests.ts',
+      setupFiles: './tests/setupTests.ts',
       globals: true,
       css: true,
       include: ['src/**/*.{test,spec}.{ts,tsx}', 'tests/**/*.{test,spec}.{ts,tsx}', 'src/**/__tests__/**/*.{ts,tsx}'],
