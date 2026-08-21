@@ -2,6 +2,8 @@
 
 A React + TypeScript application for generating 6-player Dune Imperium: Uprising table setups, now running on a modern Vite + Yarn 4 toolchain.
 
+Live app: https://diu6p.netlify.app/
+
 ## Stack
 
 - React 19
@@ -57,7 +59,6 @@ Build-time variables (used by Vite config):
 Client runtime variables (must be prefixed with VITE_):
 
 - VITE_APP_NAME
-- VITE_API_URL
 - VITE_LOG_LEVEL
 - VITE_LOG_TIMESTAMP
 
