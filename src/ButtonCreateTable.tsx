@@ -1,6 +1,7 @@
+import type { MouseEventHandler } from 'react';
+
 import { Button } from '@mui/material';
 import PropTypes from 'prop-types';
-import type { MouseEventHandler } from 'react';
 
 interface ButtonCreateTableProps {
   disabled?: boolean;

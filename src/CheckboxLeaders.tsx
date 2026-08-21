@@ -1,6 +1,7 @@
-import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material';
-import { createTheme,ThemeProvider } from '@mui/material/styles';
 import React from 'react';
+
+import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
