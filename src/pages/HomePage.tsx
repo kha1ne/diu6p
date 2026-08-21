@@ -1,7 +1,7 @@
 import '../App.css';
 
 import { Grid } from '@mui/material';
-import { createTheme,ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react';
 
 import sfxDramatic from '../assets/sfx/dramatic.mp3';
@@ -162,7 +162,7 @@ function HomePage() {
   return (
     <ThemeProvider theme={theme}>
       <div className='App'>
-        <Grid container justifyContent='center'>
+        <Grid container sx={{ justifyContent: 'center' }}>
           <Grid>
             <DropdownPlayers
               defaultValue={Players.defaultDropdownValue}
@@ -171,7 +171,7 @@ function HomePage() {
               dropdownPlayerImages={playerImageOptions}
               handlePlayerSelectionChange={handlePlayerSelectionChange}
             />
-            <Grid container direction='column' spacing={0} alignItems='left' justifyContent='center'>
+            <Grid container spacing={0} sx={{ flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center' }}>
               <Grid>
                 <LeaderAssignment value={leaderAssignment} onChange={handleLeaderAssignmentChange} />
               </Grid>
