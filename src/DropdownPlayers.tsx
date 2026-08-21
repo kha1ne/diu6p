@@ -1,6 +1,6 @@
-import { JSX } from 'react';
-
-import { FormControl, MenuItem, Paper, Select, SelectChangeEvent, ThemeProvider, Tooltip, Typography, createTheme } from '@mui/material';
+import type { SelectChangeEvent } from '@mui/material';
+import { createTheme,FormControl, MenuItem, Paper, Select, ThemeProvider, Tooltip, Typography } from '@mui/material';
+import type { JSX } from 'react';
 
 const textTheme = createTheme({
   typography: {
@@ -54,7 +54,7 @@ function DropdownPlayers({ defaultValue, playersList, selectedPlayers, dropdownP
           <FormControl fullWidth style={{ flex: 1 }}>
             <Select
               value={player}
-              onChange={(e: SelectChangeEvent<string>) => handlePlayerSelectionChange(startIndex + index, e.target.value as string)}
+              onChange={(e: SelectChangeEvent<string>) => handlePlayerSelectionChange(startIndex + index, e.target.value)}
               style={{
                 color: 'white',
                 textShadow: '2px 2px 4px rgba(0,0,0,0.5)',

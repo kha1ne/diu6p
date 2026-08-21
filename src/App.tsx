@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import './App.css';
 
 import { Grid } from '@mui/material';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { createTheme,ThemeProvider } from '@mui/material/styles';
+import React, { useEffect, useState } from 'react';
 
-import './App.css';
+import sfxDramatic from './assets/sfx/dramatic.mp3';
 import ButtonCreateTable from './ButtonCreateTable';
 import { CheckboxAuthenticStoryExperience, CheckboxUseOnlyBloodlines, LeaderAssignment } from './CheckboxLeaders';
 import { DefaultTheme, Leaders, Players } from './Constants';
 import DropdownPlayers from './DropdownPlayers';
-import sfxDramatic from './assets/sfx/dramatic.mp3';
 
 function App() {
   const [selectedPlayerOptions, setSelectedPlayerOptions] = useState(Array(6).fill(Players.defaultDropdownValue));
@@ -152,7 +152,7 @@ function App() {
     });
 
     setPlayerImageOptions(newPlayerImageOptions);
-    audioDramatic?.play();
+    void audioDramatic?.play();
   };
 
   const isAnyPlayerNotSelected = selectedPlayerOptions.some(player => player === Players.defaultDropdownValue);

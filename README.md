@@ -1,99 +1,105 @@
-# Dune Imperium: Uprising 6p Table Generator
+# Dune Imperium: Uprising 6P Table Creator
 
-A simple Hello World application built with React and TypeScript. This project is intended to be a minimal barebone setup with essential dependencies for building and testing a React application using TypeScript.
+A React + TypeScript application for generating 6-player Dune Imperium: Uprising table setups, now running on a modern Vite + Yarn 4 toolchain.
 
-## Table of Contents
+## Stack
 
-- [Project Overview](#project-overview)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Running the Application](#running-the-application)
-  - [Building the Application](#building-the-application)
-- [Testing](#testing)
-- [Project Structure](#project-structure)
-- [Scripts](#scripts)
-- [License](#license)
+- React 19
+- TypeScript 6
+- Vite 8
+- Vitest + Testing Library
+- ESLint flat config + Prettier
+- vite-plugin-pwa for service worker and web manifest generation
 
-## Project Overview
+## Prerequisites
 
-This repository contains a minimal setup for a React project using TypeScript. The project includes configurations for testing with Jest and Testing Library, as well as Babel plugins for handling modern JavaScript features.
+- Node.js 26.7.0 (see [.nvmrc](.nvmrc))
+- Corepack enabled
+- Yarn 4
 
-## Getting Started
-
-### Prerequisites
-
-Ensure you have the following installed:
-
-- [Node.js](https://nodejs.org/en/) (version 16.x or higher recommended)
-- [Corepack](https://nodejs.org/api/corepack.html) (included with Node.js 16.10+)
-- [Yarn 4](https://yarnpkg.com/) (managed via Corepack)
-
-### Installation
-
-Clone the repository and install the dependencies:
+## Installation
 
 ```bash
-git clone git@github.com:kha1ne/diu6p.git
-cd diu6p
 corepack enable
-corepack prepare yarn@4.9.1 --activate
 yarn install
 ```
 
-### Running the Application
-
-To start the development server, run:
+Copy environment defaults if needed:
 
 ```bash
-yarn start
-```
-
-This will start the app at <http://localhost:3000>. The page will automatically reload if you make edits.
-
-### Building the Application
-
-To build the app for production, run:
-
-```bash
-yarn build
-```
-
-The production-ready code will be in the build folder.
-
-## Testing
-
-This project uses Jest and Testing Library for unit and integration testing.
-
-To run the tests, execute:
-
-```bash
-yarn test
-```
-
-Coverage reports are generated automatically and can be found in the coverage folder after running the tests.
-
-## Project Structure
-
-```php
-diu6p/
-├── public/                 # Static assets
-├── src/                    # Application source code
-│   ├── components/         # React components
-│   ├── __tests__/          # Test files
-│   ├── index.tsx           # Entry point for React
-│   └── setupTests.ts        # Jest setup file
-├── package.json            # Project metadata and dependencies
-└── tsconfig.json           # TypeScript configuration
+cp .env.example .env
 ```
 
 ## Scripts
 
-- `yarn start`: Starts the development server.
-- `yarn build`: Builds the project for production.
-- `yarn test`: Runs the tests with coverage.
-- `yarn eject`: Ejects the configuration (if needed).
+- yarn dev: Start Vite dev server.
+- yarn build: Build production assets to dist.
+- yarn preview: Preview production build locally.
+- yarn type-check: Run TypeScript checks without emitting files.
+- yarn lint: Run ESLint.
+- yarn lint:check: Run ESLint with zero-warning policy.
+- yarn lint:fix: Auto-fix lint issues.
+- yarn format: Format files with Prettier.
+- yarn format:check: Check formatting.
+- yarn test: Run Vitest in watch mode.
+- yarn test:run: Run tests once.
+- yarn test:watch: Explicit Vitest watch mode.
+- yarn test:coverage: Run tests with coverage.
+- yarn test:ci: CI-oriented test run with coverage and verbose output.
+
+## Environment Variables
+
+Build-time variables (used by Vite config):
+
+- NODE_ENV
+- PORT
+
+Client runtime variables (must be prefixed with VITE_):
+
+- VITE_APP_NAME
+- VITE_API_URL
+- VITE_LOG_LEVEL
+- VITE_LOG_TIMESTAMP
+
+See [.env.example](.env.example) for defaults.
+
+## PWA
+
+PWA support is handled through vite-plugin-pwa. During build, Vite generates:
+
+- dist/manifest.webmanifest
+- dist/sw.js
+- dist/workbox-*.js
+
+## Project Structure
+
+```text
+diu6p/
+├── public/                 # Static assets (icons, images)
+├── src/                    # App source
+│   ├── assets/             # Images and sound effects
+│   ├── App.tsx             # Main UI composition
+│   ├── main.tsx            # Vite app entrypoint
+│   ├── pwa.ts              # PWA runtime registration
+│   ├── setupTests.ts       # Vitest/Testing Library setup
+│   └── *.test.tsx          # Component tests
+├── index.html              # Root Vite HTML entry
+├── vite.config.ts          # Vite + Vitest + PWA config
+├── tsconfig.json           # TypeScript config
+└── package.json            # Scripts and dependencies
+```
+
+## Verification
+
+Recommended local validation sequence:
+
+```bash
+yarn type-check
+yarn lint:check
+yarn test:run
+yarn build
+```
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for more information.
+MIT. See [LICENSE](LICENSE).
