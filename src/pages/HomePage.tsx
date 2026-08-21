@@ -171,7 +171,7 @@ function HomePage() {
               dropdownPlayerImages={playerImageOptions}
               handlePlayerSelectionChange={handlePlayerSelectionChange}
             />
-            <Grid container spacing={0} sx={{ flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center' }}>
+            <Grid container spacing={0} sx={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
               <Grid>
                 <LeaderAssignment value={leaderAssignment} onChange={handleLeaderAssignmentChange} />
               </Grid>
