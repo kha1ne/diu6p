@@ -1,0 +1,23 @@
+# Default: treat text files as text, enforce LF in repo
+* text=auto eol=lf
+
+# Common script exceptions
+*.bat eol=crlf
+*.cmd eol=crlf
+*.ps1 eol=crlf
+*.sh  eol=lf
+
+# Explicitly mark binaries so Git never changes line endings
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+
+# Optional: lock Markdown & JSON to LF (clarity)
+*.md   text eol=lf
+*.json text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
