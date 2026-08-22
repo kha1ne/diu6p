@@ -5,10 +5,10 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react';
 
 import sfxDramatic from '../assets/sfx/dramatic.mp3';
-import ButtonCreateTable from '../ButtonCreateTable';
-import { CheckboxAuthenticStoryExperience, CheckboxUseOnlyBloodlines, LeaderAssignment } from '../CheckboxLeaders';
-import { DefaultTheme, Leaders, Players } from '../Constants';
-import DropdownPlayers from '../DropdownPlayers';
+import ButtonCreateTable from '../components/ButtonCreateTable';
+import { CheckboxAuthenticStoryExperience, CheckboxUseOnlyBloodlines, LeaderAssignment } from '../components/CheckboxLeaders';
+import DropdownPlayers from '../components/DropdownPlayers';
+import { DefaultTheme, Leaders, Players } from '../utils/constants';
 
 function HomePage() {
   const [selectedPlayerOptions, setSelectedPlayerOptions] = useState(Array(6).fill(Players.defaultDropdownValue));

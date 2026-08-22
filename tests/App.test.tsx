@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import App from '../src/App';
-import { Players } from '../src/Constants';
+import { Players } from '../src/utils/constants';
 
 describe('App Component', () => {
   test('renders initial state correctly', () => {
