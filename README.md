@@ -15,7 +15,7 @@ Live app: https://diu6p.netlify.app/
 
 ## Prerequisites
 
-- Node.js 24 LTS (see [.nvmrc](.nvmrc))
+- Node.js 24.19.0 LTS (see [.nvmrc](.nvmrc))
 - Corepack enabled
 - Yarn 4
 
