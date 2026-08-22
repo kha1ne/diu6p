@@ -14,7 +14,7 @@ logger.info('Application starting', {
   baseUrl: import.meta.env.BASE_URL,
 });
 
-const root = document.getElementById('root')!
+const root = document.getElementById('root')!;
 
 createRoot(root).render(
   <React.StrictMode>
