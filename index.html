@@ -22,6 +22,18 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <!-- Unregister stale CRA service worker before module code runs -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function (regs) {
+          regs.forEach(function (reg) {
+            if (reg.active && reg.active.scriptURL.indexOf('service-worker.ts') !== -1) {
+              reg.unregister();
+            }
+          });
+        });
+      }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
