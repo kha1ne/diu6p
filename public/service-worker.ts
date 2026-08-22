@@ -3,7 +3,10 @@ self.addEventListener('install', () => {
   void self.skipWaiting();
 });
 self.addEventListener('activate', () => {
-  void self.registration.unregister().then(() => self.clients.matchAll()).then(clients => {
-    clients.forEach(client => void client.navigate(client.url));
-  });
+  void self.registration
+    .unregister()
+    .then(() => self.clients.matchAll())
+    .then(clients => {
+      clients.forEach(client => void client.navigate(client.url));
+    });
 });
