@@ -76,8 +76,8 @@ const getLogLevelFromEnv = (level?: string): LogLevel => {
 };
 
 const logger = new AppLogger({
-  level: getLogLevelFromEnv(import.meta.env.VITE_LOG_LEVEL as string | undefined),
-  timestamp: (import.meta.env.VITE_LOG_TIMESTAMP as string | undefined) !== 'false',
+  level: getLogLevelFromEnv(import.meta.env.VITE_LOG_LEVEL),
+  timestamp: import.meta.env.VITE_LOG_TIMESTAMP !== 'false',
 });
 
 export { AppLogger, logger };
