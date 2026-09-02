@@ -15,13 +15,14 @@ Live app: https://diu6p.netlify.app/
 
 ## Prerequisites
 
-- Node.js 24.19.0 LTS (see [.nvmrc](.nvmrc))
-- Corepack enabled
-- Yarn 4
+- Node.js 26.8.1 Current (pinned in [.nvmrc](.nvmrc)); Node.js 24+ is supported
+- Corepack installed separately and enabled (Node.js 25+ no longer bundles it)
+- Yarn 4.18.0
 
 ## Installation
 
 ```bash
+npm install --global corepack
 corepack enable
 yarn install
 ```
@@ -100,6 +101,8 @@ yarn lint:check
 yarn test:run
 yarn build
 ```
+
+The dependency baseline intentionally remains on TypeScript 6 until `typescript-eslint` supports TypeScript 7.
 
 ## License
 

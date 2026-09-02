@@ -10,6 +10,8 @@ import { CheckboxAuthenticStoryExperience, CheckboxUseOnlyBloodlines, LeaderAssi
 import DropdownPlayers from '../components/DropdownPlayers';
 import { DefaultTheme, Leaders, Players } from '../utils/constants';
 
+const theme = createTheme(DefaultTheme);
+
 function HomePage() {
   const [selectedPlayerOptions, setSelectedPlayerOptions] = useState(Array(6).fill(Players.defaultDropdownValue));
   const [useOnlyBloodlines, setUseOnlyBloodlines] = useState(false);
@@ -156,8 +158,6 @@ function HomePage() {
   };
 
   const isAnyPlayerNotSelected = selectedPlayerOptions.some(player => player === Players.defaultDropdownValue);
-
-  const theme = createTheme(DefaultTheme);
 
   return (
     <ThemeProvider theme={theme}>

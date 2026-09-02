@@ -17,7 +17,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | Run a single test       | `yarn vitest run tests/App.test.tsx`             |
 | Test coverage           | `yarn test:coverage`                             |
 
-Package manager is **Yarn 4** (Berry) with `node-modules` linker. Use `yarn add` / `yarn add -D`, not npm.
+Use **Node.js 26.8.1** from `.nvmrc`. Package manager is **Yarn 4** (Berry) with the `node-modules` linker. Node.js 25+
+does not bundle Corepack, so install Corepack separately when needed. Use `yarn add` / `yarn add -D`, not npm.
 
 ## Architecture
 

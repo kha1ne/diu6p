@@ -2,7 +2,17 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import App from '../src/App';
+import NotFoundPage from '../src/pages/NotFoundPage';
 import { Players } from '../src/utils/constants';
+
+async function selectAllPlayers(user: ReturnType<typeof userEvent.setup>) {
+  const dropdowns = screen.getAllByRole('combobox');
+
+  for (let i = 0; i < dropdowns.length; i++) {
+    await user.click(dropdowns[i]);
+    await user.click(screen.getByRole('option', { name: Players.list[i] }));
+  }
+}
 
 describe('App Component', () => {
   test('renders initial state correctly', () => {
@@ -44,19 +54,22 @@ describe('App Component', () => {
 
     expect(bloodlinesCheckbox).toBeEnabled();
     expect(authenticCheckbox).toBeEnabled();
+
+    fireEvent.click(bloodlinesCheckbox);
+    fireEvent.click(authenticCheckbox);
+    fireEvent.click(screen.getByRole('radio', { name: /No Selection/i }));
+
+    expect(bloodlinesCheckbox).not.toBeChecked();
+    expect(authenticCheckbox).not.toBeChecked();
+    expect(bloodlinesCheckbox).toBeDisabled();
+    expect(authenticCheckbox).toBeDisabled();
   });
 
   test('enables Create Table button when all players are selected', async () => {
     render(<App />);
     const user = userEvent.setup();
 
-    const dropdowns = screen.getAllByRole('combobox');
-
-    for (let i = 0; i < dropdowns.length; i++) {
-      await user.click(dropdowns[i]);
-      const playerOption = screen.getByRole('option', { name: Players.list[i] });
-      await user.click(playerOption);
-    }
+    await selectAllPlayers(user);
 
     const createTableButton = screen.getByText('Create Table');
     expect(createTableButton).toBeEnabled();
@@ -69,17 +82,31 @@ describe('App Component', () => {
     const draftPoolRadio = screen.getByRole('radio', { name: /Draft Pool/i });
     await user.click(draftPoolRadio);
 
-    const dropdowns = screen.getAllByRole('combobox');
-    for (let i = 0; i < dropdowns.length; i++) {
-      await user.click(dropdowns[i]);
-      const playerOption = screen.getByRole('option', { name: Players.list[i] });
-      await user.click(playerOption);
-    }
+    await selectAllPlayers(user);
 
     const createTableButton = screen.getByText('Create Table');
     await user.click(createTableButton);
 
     const gridItems = screen.getAllByTestId(/^draft-pool-item-/);
     expect(gridItems).toHaveLength(10);
+  });
+
+  test('creates an authentic random table using Bloodlines leaders', async () => {
+    render(<App />);
+    const user = userEvent.setup();
+
+    await user.click(screen.getByRole('radio', { name: /Random Assignment/i }));
+    await user.click(screen.getByRole('checkbox', { name: /Use Bloodlines Leaders/i }));
+    await user.click(screen.getByRole('checkbox', { name: /Authentic Story Experience/i }));
+    await selectAllPlayers(user);
+    await user.click(screen.getByRole('button', { name: 'Create Table' }));
+
+    expect(screen.queryByTestId(/^draft-pool-item-/)).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Create Table' })).toBeEnabled();
+  });
+
+  test('renders the not-found page', () => {
+    render(<NotFoundPage />);
+    expect(screen.getByText('Page not found')).toBeInTheDocument();
   });
 });

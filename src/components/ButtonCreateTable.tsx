@@ -1,5 +1,4 @@
 import { Button } from '@mui/material';
-import PropTypes from 'prop-types';
 import type { MouseEventHandler } from 'react';
 
 interface ButtonCreateTableProps {
@@ -17,13 +16,5 @@ function ButtonCreateTable({ disabled = false, onClick, label = 'Create Table', 
     </Button>
   );
 }
-
-ButtonCreateTable.propTypes = {
-  disabled: PropTypes.bool,
-  onClick: PropTypes.func.isRequired,
-  label: PropTypes.string,
-  variant: PropTypes.oneOf(['text', 'outlined', 'contained']),
-  color: PropTypes.oneOf(['inherit', 'primary', 'secondary', 'success', 'warning', 'error', 'info']),
-};
 
 export default ButtonCreateTable;

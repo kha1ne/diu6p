@@ -9,7 +9,7 @@ import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   {
-    ignores: ['build/**', 'dist/**', 'dev-dist/**', 'coverage/**', 'node_modules/**', '.yarn/**'],
+    ignores: ['build/**', 'dist/**', 'dev-dist/**', 'coverage/**', 'node_modules/**', '.yarn/**', 'public/service-worker.ts'],
   },
   {
     files: ['**/*.{ts,tsx,js,jsx}'],
