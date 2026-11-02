@@ -2,9 +2,9 @@
 
 ## Toolchain
 
-- Use Node.js 26.8.1 from `.nvmrc` and Yarn 4.18.0 through separately installed Corepack or an equivalent Yarn shim.
+- Use Node.js 26.13.0 from `.nvmrc` and Yarn 4.18.1 through separately installed Corepack or an equivalent Yarn shim.
 - Use Yarn commands only; do not create npm or pnpm lockfiles.
-- Keep TypeScript on the latest supported 6.0.x release until `typescript-eslint` supports TypeScript 7.
+- Use TypeScript 7.0.2 for `tsc` through the `@typescript/native` alias. Keep `typescript` aliased to `@typescript/typescript6` for ESLint's supported TypeScript 6 API until `typescript-eslint` supports TypeScript 7.
 - Preserve the Yarn `node-modules` linker and commit `yarn.lock` when dependencies change.
 
 ## Verification

@@ -7,7 +7,7 @@ Live app: https://diu6p.netlify.app/
 ## Stack
 
 - React 19
-- TypeScript 6
+- TypeScript 7.0.2 native compiler, with the TypeScript 6 API retained for ESLint
 - Vite 8
 - Vitest + Testing Library
 - ESLint flat config + Prettier
@@ -15,9 +15,9 @@ Live app: https://diu6p.netlify.app/
 
 ## Prerequisites
 
-- Node.js 26.8.1 Current (pinned in [.nvmrc](.nvmrc)); Node.js 24+ is supported
+- Node.js 26.13.0 Current (pinned in [.nvmrc](.nvmrc)); Node.js 24+ is supported
 - Corepack installed separately and enabled (Node.js 25+ no longer bundles it)
-- Yarn 4.18.0
+- Yarn 4.18.1
 
 ## Installation
 
@@ -96,13 +96,21 @@ diu6p/
 Recommended local validation sequence:
 
 ```bash
-yarn type-check
+yarn install --immutable
+yarn format:check
 yarn lint:check
-yarn test:run
+yarn type-check
+yarn test:ci
 yarn build
 ```
 
-The dependency baseline intentionally remains on TypeScript 6 until `typescript-eslint` supports TypeScript 7.
+## TypeScript 7 and ESLint compatibility
+
+`yarn type-check` runs the native TypeScript 7.0.2 compiler supplied by `@typescript/native` (`npm:typescript@7.0.2`).
+ESLint imports the TypeScript 6 API through `typescript`, aliased to `@typescript/typescript6` (`^6.0.2`),
+matching the side-by-side setup in `minimal-react-project`.
+Typed linting remains enabled and evaluates types using TypeScript 6; `yarn type-check` validates them using TypeScript 7.
+The configured editor SDK also uses TypeScript 6. Keep this compatibility setup until `typescript-eslint` supports TypeScript 7.
 
 ## License
 

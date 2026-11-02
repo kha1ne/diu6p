@@ -6,7 +6,7 @@ Convert diu6p from CRA/react-scripts to the minimal-react-project style toolchai
 
 ## Completed
 
-- Migrated package manager baseline to Yarn 4.18.0 in package metadata.
+- Migrated package manager baseline to Yarn 4.18.1 in package metadata.
 - Replaced CRA scripts with Vite/Vitest script set.
 - Replaced legacy ESLint config with flat ESM config in eslint.config.mjs.
 - Updated TypeScript config for Bundler module resolution and Vite/Vitest types.
@@ -18,7 +18,8 @@ Convert diu6p from CRA/react-scripts to the minimal-react-project style toolchai
 - Added root index.html and removed CRA public/index.html.
 - Added src/main.tsx and src/pwa.ts.
 - Removed CRA-specific service worker files.
-- Added .nvmrc (26.7.0).
+- Added .nvmrc (currently 26.13.0), synchronized with Netlify and toolchain documentation.
+- Applied `ncu -u` dependency updates and the TypeScript 7.0.2 compiler / TypeScript 6 ESLint API aliases from minimal-react-project commit `730ec36`.
 - Added .env.example and updated local .env structure.
 - Updated ignore/config files:
   - .gitignore
@@ -31,15 +32,17 @@ Convert diu6p from CRA/react-scripts to the minimal-react-project style toolchai
 
 ## Validation Status
 
-- yarn type-check: passing
+- yarn install --immutable: passing
+- yarn format:check: passing
+- yarn type-check: passing with native TypeScript 7.0.2; ESLint uses the TypeScript 6.0.3 API
 - yarn lint:check: passing
-- yarn test:run: passing
+- yarn test:ci: passing (12 tests; coverage thresholds met)
 - yarn build: passing
 
 ## Notes
 
-- Vitest prints a jsdom warning for HTMLMediaElement.play not being implemented; tests still pass.
-- Vite build warns about a large JS chunk. This is non-blocking and can be improved with code-splitting later.
+- Test setup uses the Vitest-specific jest-dom entry point so DOM matcher types augment Vitest assertions.
+- The initial Yarn install reports an optional built-in TypeScript compatibility patch warning for the TypeScript 6 alias; immutable reinstall passes.
 
 ## Next Recommended Steps
 

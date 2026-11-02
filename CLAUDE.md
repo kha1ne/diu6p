@@ -17,8 +17,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | Run a single test       | `yarn vitest run tests/App.test.tsx`             |
 | Test coverage           | `yarn test:coverage`                             |
 
-Use **Node.js 26.8.1** from `.nvmrc`. Package manager is **Yarn 4** (Berry) with the `node-modules` linker. Node.js 25+
+Use **Node.js 26.13.0** from `.nvmrc`. Package manager is **Yarn 4.18.1** (Berry) with the `node-modules` linker. Node.js 25+
 does not bundle Corepack, so install Corepack separately when needed. Use `yarn add` / `yarn add -D`, not npm.
+
+`yarn type-check` uses TypeScript 7.0.2 through the `@typescript/native` alias. The `typescript` dependency is aliased to
+`@typescript/typescript6` for ESLint's supported TypeScript 6 API and the configured editor SDK.
 
 ## Architecture
 
@@ -34,7 +37,7 @@ Configured in both `tsconfig.json` and `vite.config.ts`: `@components/*`, `@cont
 
 ### Testing
 
-Vitest with jsdom environment. Setup file at `tests/setupTests.ts` imports `@testing-library/jest-dom`. Tests live in `tests/` or co-located as `*.test.{ts,tsx}` in `src/`.
+Vitest with jsdom environment. Setup file at `tests/setupTests.ts` imports `@testing-library/jest-dom/vitest`. Tests live in `tests/` or co-located as `*.test.{ts,tsx}` in `src/`.
 
 ### Code style
 
